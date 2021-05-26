@@ -6,6 +6,7 @@ import main.Input;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
+import gui.Drawable;
 import main.Main;
 
 public class Renderer {
@@ -30,48 +31,49 @@ public class Renderer {
 		 glEnable(GL_BLEND);
 		 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		camera = new Camera(Main.height, Main.width);
-		
-		vertices = new float[] { -0.5f, 0.5f, 0, 0.5f, 0.5f, 0, 0.5f, -0.5f, 0, -0.5f, -0.5f, 0, };
-
-		texture = new float[] { 0, 0, 1, 0, 1, 1, 0, 1, };
-
-		indices = new int[] { 0, 1, 2, 2, 3, 0 };
-
-		model = new Model(vertices, texture, indices);
 		shader = new Shader("shader");
+//		vertices = new float[] { -0.5f, 0.5f, 0, 0.5f, 0.5f, 0, 0.5f, -0.5f, 0, -0.5f, -0.5f, 0, };
+//
+//		texture = new float[] { 0, 0, 1, 0, 1, 1, 0, 1, };
+//
+//		indices = new int[] { 0, 1, 2, 2, 3, 0 };
+//
+//		model = new Model(vertices, texture, indices);
+		
 
-		mat = new Material("testImage.jpg");
-		mat2 = new Material("testImage2.jpeg");
-		target = new Matrix4f();
-		scale = new Matrix4f().translate(new Vector3f(0, 0, 0)).scale(500);
+//
+//		mat = new Material("testImage.jpg");
+//		mat2 = new Material("testImage2.jpeg");
+//		target = new Matrix4f();
+//		scale = new Matrix4f().translate(new Vector3f(0, 0, 0)).scale(500);
 
 	}
 
-	/*
-	 *  Example of rendering "ball" object 
-	 *  
-	 * 	ball.getMaterial().bind(0);
-		ball.update();
+//	
+//	  Example of rendering "ball" object 
+//	  
+//	 	ball.getMaterial().bind(0);
+//		ball.update();
+//		shader.bind();
+//		shader.setUniform("sampler", 0);
+//		shader.setUniform("projection", ball.getCamera().getProjection().mul(ball.getTarget())); //This Line is taking the original location and changing it to the "Camera" projection
+//		 																						 // position which is a translated location with its actual Coordinates
+//		
+//		ball.getModel().render(); 
+//	 
+
+	public void render(Drawable drawable) {
+		glClear(GL_COLOR_BUFFER_BIT);
+		drawable.bind(0);
 		shader.bind();
 		shader.setUniform("sampler", 0);
-		shader.setUniform("projection", ball.getCamera().getProjection().mul(ball.getTarget()));
-		ball.getModel().render(); 
-	 * 
-	 */
-	public void render() {
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		target = scale;
+		shader.setUniform("projection", drawable.getTarget());
+		drawable.getModel().render();
 		
-		
-		
-
-
-		
-		
-	
-		
+		//TODO Create render method with @Param Drawable which is anything that has to be drawn on screen 		
 	}
+
+	
 	
 	
 }
