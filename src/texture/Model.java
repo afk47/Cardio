@@ -6,12 +6,19 @@ import static org.lwjgl.opengl.GL15.*;
 import org.lwjgl.BufferUtils;
 import static org.lwjgl.opengl.GL20.*;
 
+/*
+ * A Model Object is an Object that contains the coordinates for the image 
+ *  or Material to be drawn on a quad
+ * 
+ * Method render binds this to gpu
+ */
 public class Model {
 	private int draw_count;
 	private int v_id;
 	private int t_id;
 	
 	private int i_id;
+	
 	
 	public Model(float[] vertices, float[] tex_coords, int[] indices) {
 		draw_count = indices.length;

@@ -67,10 +67,15 @@ public class Renderer {
 		drawable.bind(0);
 		shader.bind();
 		shader.setUniform("sampler", 0);
-		shader.setUniform("projection", drawable.getTarget());
+		shader.setUniform("projection", drawable.translate());
 		drawable.getModel().render();
 		
 		//TODO Create render method with @Param Drawable which is anything that has to be drawn on screen 		
+	}
+
+	public void render() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

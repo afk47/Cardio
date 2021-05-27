@@ -11,7 +11,6 @@ public class Menu extends Screen{
 	protected void initialize() {
 		// TODO Initialize Buttons etc to draw on window
 		
-		//
 	}
 
 }

@@ -15,6 +15,8 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
+import Entity.Player;
+import gui.Drawable;
 import gui.Window;
 import texture.Camera;
 import texture.Material;
@@ -42,6 +44,10 @@ public class Main implements Runnable {
 	double frame_time = 0;
 	int frames = 0;
 
+	
+	//test
+	public Player p1;
+	
 	/*
 	 * creates new Main Thread and starts it
 	 * 
@@ -65,7 +71,8 @@ public class Main implements Runnable {
 		win.setFullscreen(fullscreen);
 		win.createWindow("Game");
 		GL.createCapabilities();
-
+		p1 = new Player(win);
+	
 		
 		renderer = new Renderer();
 
@@ -133,7 +140,7 @@ public class Main implements Runnable {
 	 * 
 	 */
 	private void render() {
-		renderer.render();
+		renderer.render(p1);
 		
 	}
 
@@ -147,5 +154,7 @@ public class Main implements Runnable {
 	public static void addScore(int i) {
 		score += i;
 	}
+
+	
 
 }
