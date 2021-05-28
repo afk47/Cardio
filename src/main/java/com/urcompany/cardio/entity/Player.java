@@ -2,11 +2,13 @@ package com.urcompany.cardio.entity;
 
 import com.urcompany.cardio.gui.Drawable;
 import com.urcompany.cardio.gui.Window;
+import com.urcompany.cardio.texture.Camera;
 import com.urcompany.cardio.texture.Material;
 import com.urcompany.cardio.texture.Model;
 
 public class Player extends Drawable {
 
+	private Material mat = new Material("/Sprites/Take Hit.png");
 	private float currentframe = 0;
 	private float frames = 11;
 	private int framelimiter = 0;
@@ -14,12 +16,12 @@ public class Player extends Drawable {
 	@Override
 	public void update() {
 		super.update();
-
+		
 		if (framelimiter < 6) {						// \
 			framelimiter += 1;
 		} else {
 			framelimiter = 0;						//    \
-		}
+		}				
 
 		if (framelimiter / frames == 0) {			//       } - - Used To iterate through animation and framelimiter determines how slow the animation plays
 			if (currentframe < frames) {
@@ -49,11 +51,10 @@ public class Player extends Drawable {
 
 	}
 
-	@Override
 	protected void refreshTexture() {
 		// TODO Auto-generated method stub
 		mat = new Material("/Sprites/Idle.png");
-
+		
 	}
 
 }

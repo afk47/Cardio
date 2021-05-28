@@ -13,6 +13,10 @@ import com.urcompany.cardio.gui.Drawable;
 import com.urcompany.cardio.gui.Window;
 import com.urcompany.cardio.texture.Renderer;
 
+import com.urcompany.cardio.texture.*;
+
+
+
 public class Main implements Runnable {
 
 	public static int score;
@@ -21,40 +25,45 @@ public class Main implements Runnable {
 	private Thread thread;
 	private boolean running = false;
 	public static Window win;
-
+	
 	private String title = "Game";
+	private boolean space = false;
 	public static Renderer renderer;
 
 	double frame_cap = 1.0 / 60.0;
 	double time = Timer.getTime();
 	double frame_time = 0;
 	int frames = 0;
-
+	
+	//test
 	public Player p1;
 	public Background bg;
-
+	/*
+	 * creates new Main Thread and starts it
+	 * 
+	 */
 	public void start() {
 		running = false;
 		thread = new Thread(this, "Game");
 		thread.start();
+
 	}
 
 	/*
 	 * Initializes the window and sets the main thread to running
-	 *
+	 * 
 	 */
 	private void init() {
 		Window.setCallbacks();
 		running = true;
-
+		
 		win = new Window();
-		win.setFullscreen(fullscreen);
+		win.setFullscreen(!fullscreen);
 		win.createWindow(title);
 		GL.createCapabilities();
-
 		p1 = new Player(win);
 		bg = new Background(win);
-
+		
 		renderer = new Renderer();
 
 		glEnable(GL_TEXTURE_2D);
@@ -74,7 +83,7 @@ public class Main implements Runnable {
 
 			/*
 			 * FPS COUNTER:
-			 *
+			 * 
 			 */
 			double time_2 = Timer.getTime();
 			double passed = time_2 - time;
@@ -93,11 +102,11 @@ public class Main implements Runnable {
 					frames = 0;
 				}
 
-			}
-
+			}	
+			
 			if(can_render) {
 				render();
-
+		
 				if (win.shouldClose()) {
 		 			running = false;
 
@@ -111,22 +120,26 @@ public class Main implements Runnable {
 
 	/*
 	 * updates screen and checks for new events
-	 *
+	 * 
 	 */
 	private void update() {
 		win.update();
-		running =  !win.getInput().isKeyPressed(GLFW_KEY_ESCAPE);
+		//running =  !win.getInput().isKeyPressed(GLFW_KEY_ESCAPE);
+		
+
 	}
 
 	/*
 	 * Renders the main screen
-	 *
+	 * 
 	 */
 	private void render() {
 		Drawable[] draw = new Drawable[]{bg,p1};
 		p1.update();
 		bg.update();
 		renderer.render(draw);
+		
+		
 	}
 
 	/*
@@ -139,5 +152,7 @@ public class Main implements Runnable {
 	public static void addScore(int i) {
 		score += i;
 	}
+
+	
 
 }

@@ -25,30 +25,31 @@ public abstract class Drawable {
 	protected Window win;
 	Matrix4f target;
 	Matrix4f pos;
-
+	
 	/*
 	 * Creates an object in the center of the screen
-	 *
-	 *
+	 * 
+	 * 
 	 */
 	public Drawable(Window window) {
 		win = window;
 		projection = new Matrix4f().setOrtho2D(-window.getWidth() / 2, window.getWidth() / 2, -window.getHeight() / 2,
 				window.getHeight() / 2);
 		cam = new Camera(window.getWidth(), window.getHeight());
-	}
-	public void bind(int sampler) {
-
 		mat.remove();
 		refreshTexture();
+	}
+	public void bind(int sampler) {
+		
+		//
 		mat.bind(sampler);
 	}
 
 	protected abstract void refreshTexture();
-
+	
 	/*
 	 * Moves the object to the target position
-	 *
+	 * 
 	 */
 	public Matrix4f translate() {
 		target = new Matrix4f();
@@ -71,7 +72,7 @@ public abstract class Drawable {
 	public void setMaterial(Material mat) {
 		this.mat = mat;
 	}
-
+	
 	public void updateModel(Model newModel) {
 		model = newModel;
 	}

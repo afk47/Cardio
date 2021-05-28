@@ -1,26 +1,6 @@
 package com.urcompany.cardio.texture;
 
-import static org.lwjgl.opengl.GL20.GL_COMPILE_STATUS;
-import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
-import static org.lwjgl.opengl.GL20.GL_LINK_STATUS;
-import static org.lwjgl.opengl.GL20.GL_VALIDATE_STATUS;
-import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
-import static org.lwjgl.opengl.GL20.glAttachShader;
-import static org.lwjgl.opengl.GL20.glBindAttribLocation;
-import static org.lwjgl.opengl.GL20.glCompileShader;
-import static org.lwjgl.opengl.GL20.glCreateProgram;
-import static org.lwjgl.opengl.GL20.glCreateShader;
-import static org.lwjgl.opengl.GL20.glGetProgramInfoLog;
-import static org.lwjgl.opengl.GL20.glGetProgrami;
-import static org.lwjgl.opengl.GL20.glGetShaderInfoLog;
-import static org.lwjgl.opengl.GL20.glGetShaderi;
-import static org.lwjgl.opengl.GL20.glGetUniformLocation;
-import static org.lwjgl.opengl.GL20.glLinkProgram;
-import static org.lwjgl.opengl.GL20.glShaderSource;
-import static org.lwjgl.opengl.GL20.glUniform1i;
-import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
-import static org.lwjgl.opengl.GL20.glUseProgram;
-import static org.lwjgl.opengl.GL20.glValidateProgram;
+import static org.lwjgl.opengl.GL20.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,13 +15,13 @@ public class Shader {
 	private int program;
 	private int vs;
 	private int fs;
-
+	
 	/*
-	 * Applies a new Shader using a file
-	 *
-	 * binds shaders (vertex and fragment), links shaders to @var program
+	 * Applies a new Shader using a file 
+	 * 
+	 * binds shaders (vertex and fragment), links shaders to @var program 
 	 * attaches shader and links shader to program
-	 *
+	 * 
 	 * TODO Double check this statement ^
 	 */
 	public Shader(String filename) {
@@ -62,13 +42,13 @@ public class Shader {
 			System.err.println(glGetShaderInfoLog(fs));
 			System.exit(1);
 		}
-
+		
 		glAttachShader(program, vs);
 		glAttachShader(program, fs);
-
+		
 		glBindAttribLocation(program, 0, "vertices");
 		glBindAttribLocation(program, 1, "textures");
-
+		
 		glLinkProgram(program);
 		if(glGetProgrami(program, GL_LINK_STATUS) != 1) {
 			System.err.println(glGetProgramInfoLog(program));
@@ -79,19 +59,19 @@ public class Shader {
 			System.err.println(glGetProgramInfoLog(program));
 			System.exit(1);
 		}
-
-
+		
+		
 		/*
 			glBindAttribLocation(program, 0, "vertices");
 			glBindAttribLocation(program, 0, "vertices");
 		 */
-
+		
 	}
-
+	
 	/*
-	 * Sets "Uniform"
+	 * Sets "Uniform" 
 	 * TODO Figure out what this actually does lol
-	 *
+	 * 
 	 */
 	public void setUniform(String name, int value) {
 		int location = glGetUniformLocation(program, name);
@@ -99,7 +79,7 @@ public class Shader {
 			glUniform1i(location, value);
 		}
 	}
-
+	
 	public void setUniform(String name, Matrix4f value) {
 		int location = glGetUniformLocation(program, name);
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(16);
@@ -108,18 +88,18 @@ public class Shader {
 			glUniformMatrix4fv(location, false, buffer);
 		}
 	}
-
+	
 	/*
 	 * Applies Shader to renderer
-	 *
+	 * 
 	 */
 	public void bind() {
 		glUseProgram(program);
 	}
-
+	
 	/*
 	 * Reads in file (wow)
-	 *
+	 * 
 	 */
 	private String readFile(String filename) {
 		StringBuilder string = new StringBuilder();

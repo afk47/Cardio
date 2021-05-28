@@ -4,6 +4,7 @@ package com.urcompany.cardio.texture;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.stb.STBImage;
 import org.lwjgl.system.MemoryStack;
 
@@ -38,8 +39,8 @@ public class Texture {
 		}
 		return new Texture(width, height, image);
 	}
-
-
+	
+	
 	public int getWidth() {
 		return width;
 	}

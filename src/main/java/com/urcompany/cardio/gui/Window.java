@@ -30,6 +30,8 @@ public class Window {
 	private boolean fullscreen = true;
 	private long window;
 	private Input input;
+	private int[] heightp;
+	private int[] widthp;
 	private GLFWWindowSizeCallback windowSizeCallback;
 	private boolean hasResized;
 
@@ -39,8 +41,8 @@ public class Window {
 
 	/*
 	 * Sets Callbacks for errors
-	 *
-	 *
+	 * 
+	 * 
 	 */
 	public static void setCallbacks() {
 		glfwSetErrorCallback(new GLFWErrorCallback() {
@@ -69,9 +71,9 @@ public class Window {
 
 	/*
 	 * Creates a window
-	 *
+	 * 
 	 * @PARAM title : title of window
-	 *
+	 * 
 	 */
 	public void createWindow(String title) {
 		setSize(1920, 1080);
@@ -103,8 +105,8 @@ public class Window {
 
 	/*
 	 * Getters/Setters as well as update methods to refresh the window
-	 *
-	 *
+	 * 
+	 * 
 	 */
 	public boolean shouldClose() {
 		return glfwWindowShouldClose(window);
@@ -129,6 +131,7 @@ public class Window {
 	}
 
 	public int getHeight() {
+		
 		return height;
 	}
 
