@@ -16,6 +16,7 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
 import Entity.Player;
+import gui.Background;
 import gui.Drawable;
 import gui.Window;
 import texture.Camera;
@@ -26,10 +27,8 @@ import texture.Shader;
 
 public class Main implements Runnable {
 
-	public static int width = 1280;// Window Width 
-	public static int height = 720;// Window Height
 	public static int score;
-	private boolean fullscreen = false;
+	private boolean fullscreen = true;
 
 	private Thread thread;
 	private boolean running = false;
@@ -43,11 +42,10 @@ public class Main implements Runnable {
 	double time = Timer.getTime();
 	double frame_time = 0;
 	int frames = 0;
-
 	
 	//test
 	public Player p1;
-	
+	public Background bg;
 	/*
 	 * creates new Main Thread and starts it
 	 * 
@@ -69,10 +67,11 @@ public class Main implements Runnable {
 		
 		win = new Window();
 		win.setFullscreen(fullscreen);
-		win.createWindow("Game");
+		win.createWindow(title);
 		GL.createCapabilities();
+		
 		p1 = new Player(win);
-	
+		bg = new Background(win);
 		
 		renderer = new Renderer();
 
@@ -91,6 +90,10 @@ public class Main implements Runnable {
 		double unprocessed = 0;
 		while (running) {
 
+			/*
+			 * FPS COUNTER:
+			 * 
+			 */
 			double time_2 = Timer.getTime();
 			double passed = time_2 - time;
 			unprocessed += passed;
@@ -114,7 +117,7 @@ public class Main implements Runnable {
 				render();
 		
 				if (win.shouldClose()) {
-					running = false;
+		 			running = false;
 
 				}
 				win.swapBuffers();
@@ -130,7 +133,7 @@ public class Main implements Runnable {
 	 */
 	private void update() {
 		win.update();
-
+		running =  !win.getInput().isKeyPressed(GLFW_KEY_ESCAPE);
 		
 
 	}
@@ -140,7 +143,11 @@ public class Main implements Runnable {
 	 * 
 	 */
 	private void render() {
-		renderer.render(p1);
+		Drawable[] draw = new Drawable[]{bg,p1};
+		p1.update();
+		bg.update();
+		renderer.render(draw);
+		
 		
 	}
 
