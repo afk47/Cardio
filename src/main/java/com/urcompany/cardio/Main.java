@@ -4,6 +4,8 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.glEnable;
 
+import java.util.ArrayList;
+
 import org.lwjgl.opengl.GL;
 
 import com.urcompany.cardio.controllers.Timer;
@@ -39,6 +41,8 @@ public class Main implements Runnable {
 	//test
 	public Player p1;
 	public Background bg;
+	private ArrayList<Drawable> drawables = new ArrayList<Drawable>(); //List of all drawables where the lower the index the farther back it is Example: background is furthest back
+	
 	/*
 	 * creates new Main Thread and starts it
 	 * 
@@ -68,39 +72,15 @@ public class Main implements Runnable {
 		renderer = new Renderer();
 
 		glEnable(GL_TEXTURE_2D);
+		
+		drawables.add(bg); 
+		drawables.add(p1);
 	}
 
 	/*
 	 * Main Loop while running is true calls Update and Render methods Sets running
 	 * to false when window closes
 	 */
-	
-//				
-//	unprocessed += passed;
-//	frame_time += passed;
-//
-//	time = time_2;
-//	while (unprocessed >= frame_cap) {
-//		unprocessed -= frame_cap;
-//		can_render = true;
-//		update();
-//
-//		if (frame_time >= 1.0) {
-//			frame_time = 0;
-//			System.out.println("FPS: " + frames);
-//			frames = 0;
-//		}
-//
-//	}	
-//	
-//	if(can_render) {
-//		render();
-//		if (win.shouldClose()) {
-// 			running = false;
-//		}
-//		win.swapBuffers();
-//		frames++;
-//	}
 	@Override
 	public void run() {
 		init();
@@ -117,29 +97,50 @@ public class Main implements Runnable {
 	 */
 	private void update() {
 		win.update();
-		if(win.getInput().isKeyReleased(GLFW_KEY_SPACE)) {
+		if(win.getInput().isKeyReleased(GLFW_KEY_SPACE)) {//temporary to test animation system
 			p1.attack();
 		}
-		if(win.getInput().isKeyPressed(GLFW_KEY_ESCAPE) || win.shouldClose()){
+		
+		if(win.getInput().isKeyDown(GLFW_KEY_A)) {//temporary to test image translation
+			p1.addPosition(new float[] {-10f,0f,0f});
+		}
+		if(win.getInput().isKeyDown(GLFW_KEY_D)) {//temporary to test image translation
+			p1.addPosition(new float[] {10f,0f,0f});
+		}
+		if(win.getInput().isKeyDown(GLFW_KEY_W)) {//temporary to test image translation
+			p1.addPosition(new float[] {0f,10f,0f});
+		}
+		if(win.getInput().isKeyDown(GLFW_KEY_S)) {//temporary to test image translation
+			p1.addPosition(new float[] {0f,-10f,0f});
+		}
+		
+		
+		
+		
+		
+		
+		
+		if(win.getInput().isKeyPressed(GLFW_KEY_ESCAPE) || win.shouldClose()){//window close shortcut (also temporary)
 			running = false;
 		}
+		
+		//A Timer that keeps track of how long since this was last called in Seconds
 		double time_2 = Timer.getTime();
 		passed = time_2 - time;
 		time = time_2;
 
+		for(Drawable d : drawables) {//Iterates through all drawables and updates them in order
+			d.update();
+		}
 	}
 
 	/*
 	 * Renders the main screen
 	 * 
 	 */
-	private void render() {
-		Drawable[] draw = new Drawable[]{bg,p1};
-		p1.update();
+	private void render() { 
 		
-		bg.update();
-		renderer.render(draw);
-		
+		renderer.render(drawables);
 		
 	}
 
@@ -158,5 +159,8 @@ public class Main implements Runnable {
 		return passed;
 	}
 	
+	public void addDrawable(Drawable d) {
+		
+	}
 
 }

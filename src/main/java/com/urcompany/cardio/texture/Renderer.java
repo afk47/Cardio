@@ -2,6 +2,9 @@ package com.urcompany.cardio.texture;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 import static org.lwjgl.opengl.GL11.*;
+
+import java.util.ArrayList;
+
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
@@ -41,7 +44,7 @@ public class Renderer {
 
  
 
-	public void render(Drawable[] drawables) {
+	public void render(ArrayList<Drawable> drawables) {
 		glClear(GL_COLOR_BUFFER_BIT);
 		for(Drawable drawable : drawables) {
 		drawable.bind(0);

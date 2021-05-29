@@ -118,6 +118,12 @@ public abstract class Drawable {
 	public void updateModel(Model newModel) {
 		model = newModel;
 	}
+	
+	public void addPosition(float[] v) {
+		for(int i = 0; i < v.length; i++) {
+			position[i] += v[i];
+		}
+	}
 
 
 }
