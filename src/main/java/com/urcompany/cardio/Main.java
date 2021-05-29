@@ -1,6 +1,6 @@
 package com.urcompany.cardio;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.glEnable;
 
@@ -34,6 +34,7 @@ public class Main implements Runnable {
 	double time = Timer.getTime();
 	double frame_time = 0;
 	int frames = 0;
+	private static double passed;
 	
 	//test
 	public Player p1;
@@ -73,48 +74,40 @@ public class Main implements Runnable {
 	 * Main Loop while running is true calls Update and Render methods Sets running
 	 * to false when window closes
 	 */
+	
+//				
+//	unprocessed += passed;
+//	frame_time += passed;
+//
+//	time = time_2;
+//	while (unprocessed >= frame_cap) {
+//		unprocessed -= frame_cap;
+//		can_render = true;
+//		update();
+//
+//		if (frame_time >= 1.0) {
+//			frame_time = 0;
+//			System.out.println("FPS: " + frames);
+//			frames = 0;
+//		}
+//
+//	}	
+//	
+//	if(can_render) {
+//		render();
+//		if (win.shouldClose()) {
+// 			running = false;
+//		}
+//		win.swapBuffers();
+//		frames++;
+//	}
 	@Override
 	public void run() {
 		init();
-		boolean can_render = false;
-
-		double unprocessed = 0;
 		while (running) {
-
-			/*
-			 * FPS COUNTER:
-			 * 
-			 */
-			double time_2 = Timer.getTime();
-			double passed = time_2 - time;
-			unprocessed += passed;
-			frame_time += passed;
-
-			time = time_2;
-			while (unprocessed >= frame_cap) {
-				unprocessed -= frame_cap;
-				can_render = true;
-				update();
-
-				if (frame_time >= 1.0) {
-					frame_time = 0;
-					System.out.println("FPS: " + frames);
-					frames = 0;
-				}
-
-			}	
-			
-			if(can_render) {
-				render();
-		
-				if (win.shouldClose()) {
-		 			running = false;
-
-				}
-				win.swapBuffers();
-				frames++;
-			}
-
+			update();
+			render();
+			win.swapBuffers();
 		}
 	}
 
@@ -124,8 +117,15 @@ public class Main implements Runnable {
 	 */
 	private void update() {
 		win.update();
-		//running =  !win.getInput().isKeyPressed(GLFW_KEY_ESCAPE);
-		
+		if(win.getInput().isKeyReleased(GLFW_KEY_SPACE)) {
+			p1.attack();
+		}
+		if(win.getInput().isKeyPressed(GLFW_KEY_ESCAPE) || win.shouldClose()){
+			running = false;
+		}
+		double time_2 = Timer.getTime();
+		passed = time_2 - time;
+		time = time_2;
 
 	}
 
@@ -136,6 +136,7 @@ public class Main implements Runnable {
 	private void render() {
 		Drawable[] draw = new Drawable[]{bg,p1};
 		p1.update();
+		
 		bg.update();
 		renderer.render(draw);
 		
@@ -152,7 +153,10 @@ public class Main implements Runnable {
 	public static void addScore(int i) {
 		score += i;
 	}
-
+	
+	public static double getPassed(){
+		return passed;
+	}
 	
 
 }
