@@ -4,11 +4,14 @@ package com.urcompany.cardio.texture;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.stb.STBImage;
 import org.lwjgl.system.MemoryStack;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Texture {
+
+	private static final Logger logger = LoggerFactory.getLogger(Texture.class);
 
 	private ByteBuffer image;
 	private int width;
@@ -32,15 +35,15 @@ public class Texture {
 
 			image = STBImage.stbi_load(path, w, h, comp, 4);
 			if (image == null) {
-				System.err.println("Couldn't load " + path);
+				logger.error("Couldn't load texture at location: {}",path);
 			}
 			width = w.get();
 			height = h.get();
 		}
 		return new Texture(width, height, image);
 	}
-	
-	
+
+
 	public int getWidth() {
 		return width;
 	}

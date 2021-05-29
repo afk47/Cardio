@@ -20,10 +20,14 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.urcompany.cardio.controllers.Input;
 
 public class Window {
+
+	private static final Logger logger = LoggerFactory.getLogger(Window.class);
 
 	private int width = 1000;
 	private int height = 1000;
@@ -41,8 +45,8 @@ public class Window {
 
 	/*
 	 * Sets Callbacks for errors
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public static void setCallbacks() {
 		glfwSetErrorCallback(new GLFWErrorCallback() {
@@ -71,14 +75,14 @@ public class Window {
 
 	/*
 	 * Creates a window
-	 * 
+	 *
 	 * @PARAM title : title of window
-	 * 
+	 *
 	 */
 	public void createWindow(String title) {
 		setSize(1920, 1080);
 		if (!glfwInit()) {
-			System.err.println("failed to initialize window");
+			logger.error("Failed to initialize window");
 			System.exit(1);
 		}
 
@@ -105,8 +109,8 @@ public class Window {
 
 	/*
 	 * Getters/Setters as well as update methods to refresh the window
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public boolean shouldClose() {
 		return glfwWindowShouldClose(window);
@@ -131,7 +135,7 @@ public class Window {
 	}
 
 	public int getHeight() {
-		
+
 		return height;
 	}
 
