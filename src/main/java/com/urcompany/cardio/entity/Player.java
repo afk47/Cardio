@@ -13,7 +13,7 @@ public class Player extends Drawable {
 	public void update() {
 		super.update();
 		if(currentAnimation != "Idle" && animationCompleted) {
-			attack();
+			idle();
 		}
 		setFrame((int) currentframe);
 		// updateModel(new Model(vertices, texture_coords, indices));

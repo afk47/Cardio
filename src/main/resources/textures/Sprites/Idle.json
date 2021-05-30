@@ -1,6 +1,6 @@
 {"frames": {
 
-"Attack1-0.png":
+"Idle-0.png":
 {
 	"frame": {"x":0,"y":0,"w":180,"h":180},
 	"rotated": false,
@@ -8,7 +8,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":180},
 	"sourceSize": {"w":180,"h":180}
 },
-"Attack1-1.png":
+"Idle-1.png":
 {
 	"frame": {"x":180,"y":0,"w":180,"h":180},
 	"rotated": false,
@@ -16,7 +16,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":180},
 	"sourceSize": {"w":180,"h":180}
 },
-"Attack1-2.png":
+"Idle-2.png":
 {
 	"frame": {"x":360,"y":0,"w":180,"h":180},
 	"rotated": false,
@@ -24,7 +24,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":180},
 	"sourceSize": {"w":180,"h":180}
 },
-"Attack1-3.png":
+"Idle-3.png":
 {
 	"frame": {"x":540,"y":0,"w":180,"h":180},
 	"rotated": false,
@@ -32,7 +32,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":180},
 	"sourceSize": {"w":180,"h":180}
 },
-"Attack1-4.png":
+"Idle-4.png":
 {
 	"frame": {"x":720,"y":0,"w":180,"h":180},
 	"rotated": false,
@@ -40,7 +40,7 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":180},
 	"sourceSize": {"w":180,"h":180}
 },
-"Attack1-5.png":
+"Idle-5.png":
 {
 	"frame": {"x":900,"y":0,"w":180,"h":180},
 	"rotated": false,
@@ -48,9 +48,41 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":180},
 	"sourceSize": {"w":180,"h":180}
 },
-"Attack1-6.png":
+"Idle-6.png":
 {
 	"frame": {"x":1080,"y":0,"w":180,"h":180},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":180},
+	"sourceSize": {"w":180,"h":180}
+},
+"Idle-7.png":
+{
+	"frame": {"x":1260,"y":0,"w":180,"h":180},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":180},
+	"sourceSize": {"w":180,"h":180}
+},
+"Idle-8.png":
+{
+	"frame": {"x":1440,"y":0,"w":180,"h":180},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":180},
+	"sourceSize": {"w":180,"h":180}
+},
+"Idle-9.png":
+{
+	"frame": {"x":1620,"y":0,"w":180,"h":180},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":180},
+	"sourceSize": {"w":180,"h":180}
+},
+"Idle-10.png":
+{
+	"frame": {"x":1800,"y":0,"w":180,"h":180},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":180},
@@ -59,10 +91,10 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "Attack1.png",
+	"image": "Idle.png",
 	"format": "RGBA8888",
-	"size": {"w":1260,"h":180},
+	"size": {"w":1980,"h":180},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:245b327be5d9b2589e7ebff70a225d0f:efb1c6ba109f06915417a5decd69424a:0fc420eb60f6e03d7976d45ee11832f0$"
+	"smartupdate": "$TexturePacker:SmartUpdate:597c3ecba82913f6530e4fe3dc2acd69:1ef4f445fb1dc069d5818d5aa387998f:4110a28975c182a70679d0498c6cc751$"
 }
 }
