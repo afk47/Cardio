@@ -40,7 +40,7 @@ public class Main implements Runnable {
 	
 	//test
 	public Player p1;
-	public Background bg;
+	//public Background bg;
 	private ArrayList<Drawable> drawables = new ArrayList<Drawable>(); //List of all drawables where the lower the index the farther back it is Example: background is furthest back
 	
 	/*
@@ -67,13 +67,13 @@ public class Main implements Runnable {
 		win.createWindow(title);
 		GL.createCapabilities();
 		p1 = new Player(win);
-		bg = new Background(win);
+		//bg = new Background(win);
 		
 		renderer = new Renderer();
 
 		glEnable(GL_TEXTURE_2D);
 		
-		drawables.add(bg); 
+		//drawables.add(bg); 
 		drawables.add(p1);
 	}
 

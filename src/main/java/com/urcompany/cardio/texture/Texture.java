@@ -1,59 +1,44 @@
 package com.urcompany.cardio.texture;
 
-
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-
-import org.lwjgl.stb.STBImage;
-import org.lwjgl.system.MemoryStack;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static org.lwjgl.opengl.GL13.*;
+import org.lwjgl.opengl.GL11;
 
 public class Texture {
-
-	private static final Logger logger = LoggerFactory.getLogger(Texture.class);
-
-	private ByteBuffer image;
-	private int width;
-	private int height;
-
-	public Texture(int width, int height, ByteBuffer image) {
-		this.image = image;
-		this.height = height;
-		this.width = width;
+	private int textureID;
+	private TextureLoader texture;
+	public Texture(String file) {
+		textureID = GL11.glGenTextures();
+		texture = TextureLoader.loadImage("src/main/resources/textures" + file);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
+		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, texture.getWidth(), texture.getHeight(), 0, GL11.GL_RGBA,
+				GL11.GL_UNSIGNED_BYTE, texture.getImage());
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+		
 	}
 
-	public static Texture loadImage(String path) {
-		ByteBuffer image;
-		int width;
-		int height;
-
-		try (MemoryStack stack = MemoryStack.stackPush()) {
-			IntBuffer comp = stack.mallocInt(1);
-			IntBuffer w = stack.mallocInt(1);
-			IntBuffer h = stack.mallocInt(1);
-
-			image = STBImage.stbi_load(path, w, h, comp, 4);
-			if (image == null) {
-				logger.error("Couldn't load texture at location: {}",path);
-			}
-			width = w.get();
-			height = h.get();
+	public void bind(int sampler) {
+		if(sampler >= 0 && sampler <= 31) {	
+		
+		glActiveTexture(GL_TEXTURE0 + sampler);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
+		
 		}
-		return new Texture(width, height, image);
 	}
 
+	public void remove() {
+		GL11.glDeleteTextures(textureID);
 
-	public int getWidth() {
-		return width;
 	}
 
-	public int getHeight() {
-		return height;
+	public int getTextureID() {
+		return textureID;
+	}
+	
+	public TextureLoader getTexture() {
+		return texture;
 	}
 
-	public ByteBuffer getImage() {
-		return image;
-	}
 
 }

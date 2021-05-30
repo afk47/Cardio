@@ -16,7 +16,6 @@ import com.urcompany.cardio.texture.*;
 
 public class Renderer {
 
-	public Camera camera;
 	private float[] vertices;
 
 	private float[] texture;
@@ -26,8 +25,8 @@ public class Renderer {
 	private Model model;
 	private Shader shader;
 
-	private Material mat;
-	private Material mat2;
+	private Texture mat;
+	private Texture mat2;
 	private Matrix4f target;
 	private Matrix4f scale;
 
@@ -35,7 +34,6 @@ public class Renderer {
 
 		 glEnable(GL_BLEND);
 		 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		camera = new Camera(Main.win.getHeight(), Main.win.getWidth());
 		shader = new Shader("shader");
 		
 		

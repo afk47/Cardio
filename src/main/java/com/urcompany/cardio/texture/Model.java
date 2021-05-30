@@ -16,9 +16,12 @@ public class Model {
 	private int draw_count;
 	private int v_id;
 	private int t_id;
-	
 	private int i_id;
 	
+	
+	private static final float[] DEFAULT_VERT = new float[] { -1f, 1f, 0, 1f, 1f, 0, 1f, -1f, 0, -1f, -1f, 0, };
+	private static final float[] DEFAULT_TEX_COORDS = new float[] { 0, 0, 1, 0, 1, 1, 0, 1, };
+	private static final int[] DEFAULT_INDICES = new int[] { 0, 1, 2, 2, 3, 0 };
 	
 	public Model(float[] vertices, float[] tex_coords, int[] indices) {
 		draw_count = indices.length;
@@ -46,6 +49,14 @@ public class Model {
 		
 	}
 	
+	public Model() {
+		this(DEFAULT_VERT, DEFAULT_TEX_COORDS, DEFAULT_INDICES);
+	}
+	
+	public Model(float[] tex_coords) {
+		this(DEFAULT_VERT, tex_coords, DEFAULT_INDICES);
+	}
+	
 	public void render() {
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
@@ -66,6 +77,7 @@ public class Model {
 		glDisableVertexAttribArray(1);
 		
 	}
+
 	
 	private FloatBuffer createBuffer(float[] data) {
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(data.length);

@@ -4,25 +4,19 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 import com.urcompany.cardio.Main;
-import com.urcompany.cardio.texture.Camera;
-import com.urcompany.cardio.texture.Material;
+import com.urcompany.cardio.texture.Texture;
+import com.urcompany.cardio.texture.AnimationLoader;
 import com.urcompany.cardio.texture.Model;
 
 public abstract class Drawable {
 
-	protected float[] vertices = new float[] { -1f, 1f, 0, 1f, 1f, 0, 1f, -1f, 0, -1f, -1f, 0, };
 
-	protected float[] texture_coords = new float[] { 0, 0, 1, 0, 1, 1, 0, 1, };
-
-	protected int[] indices = new int[] { 0, 1, 2, 2, 3, 0 };
-
-	protected Material mat = new Material("/Sprites/Take Hit.png");;
+	protected Texture mat = new Texture("/Sprites/Take Hit.png");
 	protected int states;
-	protected Camera cam;
 	protected Matrix4f projection;
 	protected float[] position = { 0, 0, 0 };
 	protected float size = 400;
-	protected Model model = new Model(vertices, texture_coords, indices);
+	protected Model model = new Model();
 	protected Window win;
 	protected float currentframe = 0;
 	protected float frames = 1;
@@ -34,6 +28,7 @@ public abstract class Drawable {
 	protected float animationLength = 0;
 	protected boolean animationCompleted = false;
 	protected String currentAnimation = "Take Hit";
+	private AnimationLoader testLoader = new AnimationLoader();;
 	
 	/*
 	 * 
@@ -46,8 +41,6 @@ public abstract class Drawable {
 		win = window;
 		projection = new Matrix4f().setOrtho2D(-window.getWidth() / 2, window.getWidth() / 2, -window.getHeight() / 2,
 				window.getHeight() / 2);
-		cam = new Camera(window.getWidth(), window.getHeight());
-		mat.remove();
 		refreshTexture();
 	}
 
@@ -61,10 +54,8 @@ public abstract class Drawable {
 		
 		currentframe = frames * (animationTimer / animationLength); 
 		
+		setFrame((int)Math.floor(currentframe));
 		
-		
-		
-//		projection = new Matrix4f().setOrtho2D(-win.getWidth() / 2, win.getWidth() / 2, -win.getHeight() / 2, win.getHeight() / 2); //Creates distortion?? supposed to prevent it lol
 	}
 
 	public void bind(int sampler) {
@@ -86,23 +77,34 @@ public abstract class Drawable {
 	}
 
 	// GETTERS AND SETTERS
-	protected void setAnimation(float framesTotal, String file, float length) {
+	/*
+	 * @Param length animation length (in seconds)
+	 * @Param file animation file name
+	 * @Param framesTotal total frames in animation
+	 * 
+	 */
+	protected void setAnimation(String file, float length) {
 		mat.remove();
+		testLoader.loadAnimation(file);
 		animationTimer = 0;
+		currentframe = 0;
 		currentAnimation = file;
-		setMaterial(new Material("/Sprites/" + file + ".png"));
+		setMaterial(new Texture("/Sprites/" + file + ".png"));
 		animationLength = length;
-		frames = framesTotal;
 		animationCompleted = false;
+		
 	}
 
 	protected void setFrame(int f) {
-		float framepos = 1 / frames;
-		framepos = framepos * f;
-		texture_coords = new float[] { 0 + framepos, 0, 1 / frames + framepos, 0, 1 / frames + framepos, 1,
-				0 + framepos, 1, };
+		testLoader.loadFrame(f);
+		model = new Model(testLoader.getFrameCoordinates());
+		
 	}
 
+	public void setPosition(float x, float y) {
+		position[0] = x;
+		position[1] = y;
+	}
 	protected void setTotalFrames(float f) {
 		frames = f;
 	}
@@ -111,7 +113,7 @@ public abstract class Drawable {
 		return model;
 	}
 
-	public void setMaterial(Material mat) {
+	public void setMaterial(Texture mat) {
 		this.mat = mat;
 	}
 

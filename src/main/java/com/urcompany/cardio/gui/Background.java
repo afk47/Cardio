@@ -1,6 +1,6 @@
 package com.urcompany.cardio.gui;
 
-import com.urcompany.cardio.texture.Material;
+import com.urcompany.cardio.texture.Texture;
 
 public class Background extends Drawable{
 
@@ -14,7 +14,8 @@ public class Background extends Drawable{
 	@Override
 	protected void refreshTexture() {
 		// TODO Auto-generated method stub
-		mat = new Material("/images/Background.png");
+		
+		mat = new Texture("/images/Background.png");
 
 	}
 

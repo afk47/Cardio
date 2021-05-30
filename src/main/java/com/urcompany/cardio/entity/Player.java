@@ -3,50 +3,44 @@ package com.urcompany.cardio.entity;
 import com.urcompany.cardio.Main;
 import com.urcompany.cardio.gui.Drawable;
 import com.urcompany.cardio.gui.Window;
-import com.urcompany.cardio.texture.Camera;
-import com.urcompany.cardio.texture.Material;
+import com.urcompany.cardio.texture.Texture;
+import com.urcompany.cardio.texture.AnimationLoader;
 import com.urcompany.cardio.texture.Model;
 
 public class Player extends Drawable {
 
-	private Material mat;
-	
-	/*
-	 * 
-	 * 
-	 */
 	@Override
 	public void update() {
 		super.update();
-		
 		if(currentAnimation != "Idle" && animationCompleted) {
-			idle();
+			attack();
 		}
 		setFrame((int) currentframe);
-		updateModel(new Model(vertices, texture_coords, indices));
+		// updateModel(new Model(vertices, texture_coords, indices));
 		
 		
 	}
 
 	public Player(Window window) {
 		super(window);
+		attack();
 		size = 400;
-		position = new float[] { -300, -300, 0 };
-		super.setTotalFrames((float) 11);
-	}
+		setPosition(-300,-300);
+	} 
 
 
 
 	public void attack() {
-		setAnimation(7, "Attack1", 0.5f);
+		setAnimation("Attack1", 0.5f);
+		setTotalFrames(7);
 	}
 
 	protected void refreshTexture() {
-		idle();
+		attack();
 	}
 
 	private void idle() {
-		setAnimation(11, "Idle", 1);
+		setAnimation("Idle", 1);
 		
 	}
 
