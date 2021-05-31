@@ -74,6 +74,7 @@ public class AnimationLoader {
 				String jsonString = "" + node.get("frames");
 				node = new ObjectMapper().readValue(jsonString, ObjectNode.class);
 				if (node.has(animation + "-" + i + ".png")) {
+					frames = node.size();
 					jsonString = "" + node.get(animation + "-" + i + ".png");
 					node = new ObjectMapper().readValue(jsonString, ObjectNode.class);
 					if (node.has("frame")) {
@@ -92,9 +93,13 @@ public class AnimationLoader {
 						float y2 = (fy + fh) / h;
 						
 						texture_coords = new float[] {x1,y1,x2,y1,x2,y2,x1,y2,};
+						
 					}
 				}
+				jsonString = null;
 			}
+			json = null;
+			node = null;
 
 		} catch (JsonMappingException e) {
 			logger.debug("JsonMappingException", e);
@@ -105,6 +110,7 @@ public class AnimationLoader {
 			logger.debug("IOException", e);
 		}
 
+	
 	}
 
 	public void loadNextFrame() {
@@ -114,5 +120,10 @@ public class AnimationLoader {
 	public float[] getFrameCoordinates() {
 		return texture_coords;
 	}
+	
+	public int getTotalFrames() {
+		return frames;
+	}
+
 
 }

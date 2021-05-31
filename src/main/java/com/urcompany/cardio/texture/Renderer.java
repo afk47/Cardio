@@ -13,55 +13,34 @@ import com.urcompany.cardio.controllers.*;
 import com.urcompany.cardio.gui.*;
 import com.urcompany.cardio.texture.*;
 
-
 public class Renderer {
-
-	private float[] vertices;
-
-	private float[] texture;
-
-	private int[] indices;
-
-	private Model model;
 	private Shader shader;
-
-	private Texture mat;
-	private Texture mat2;
-	private Matrix4f target;
-	private Matrix4f scale;
 
 	public Renderer() {
 
-		 glEnable(GL_BLEND);
-		 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		shader = new Shader("shader");
-		
-		
 
 	}
-
- 
 
 	public void render(ArrayList<Drawable> drawables) {
 		glClear(GL_COLOR_BUFFER_BIT);
-		for(Drawable drawable : drawables) {
-		drawable.bind(0);
-		shader.bind();
-		shader.setUniform("sampler", 0);
-		shader.setUniform("projection", drawable.translate());
-		drawable.getModel().render();
+		for (Drawable drawable : drawables) {
+			drawable.bind(0);
+			shader.bind();
+			shader.setUniform("sampler", 0);
+			shader.setUniform("projection", drawable.translate());
+			drawable.getModel().render();
+			
 		}
-		//TODO Create render method with @Param Drawable which is anything that has to be drawn on screen 		
+		// TODO Create render method with @Param Drawable which is anything that has to
+		// be drawn on screen
 	}
-	
-	
 
 	public void render() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
-	
-	
 }

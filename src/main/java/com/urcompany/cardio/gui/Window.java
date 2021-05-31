@@ -85,7 +85,8 @@ public class Window {
 			logger.error("Failed to initialize window");
 			System.exit(1);
 		}
-
+		glfwGetWindowSize(glfwGetPrimaryMonitor(), widthp, heightp);
+		
 		window = glfwCreateWindow(width, height, title, fullscreen ? glfwGetPrimaryMonitor() : 0, 0);
 
 		if (window == 0)
@@ -99,7 +100,7 @@ public class Window {
 			glfwShowWindow(window);
 
 		} else {
-			setSize(vid.width(), vid.height());
+			setSize(widthp[0], heightp[0]);
 		}
 		input = new Input(window);
 
