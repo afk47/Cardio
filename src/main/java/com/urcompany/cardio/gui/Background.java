@@ -14,7 +14,7 @@ public class Background implements Drawable{
 	Matrix4f pos;
 	Matrix4f target;
 	protected Matrix4f projection;
-	int size = 1;
+	float size = 1;
 	float[] position;
 	private Window win;
 	
@@ -22,8 +22,8 @@ public class Background implements Drawable{
 		win = window;
 		projection = new Matrix4f().setOrtho2D(-window.getWidth() / 2, window.getWidth() / 2, -window.getHeight() / 2,
 				window.getHeight() / 2);
-		size = 1000;
-		position = new float[]{0, 450, 0};
+		size = 1.2f;
+		position = new float[]{0, 400, 0};
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,11 +35,11 @@ public class Background implements Drawable{
 
 	@Override
 	public Matrix4f translate() {
-
 		target = new Matrix4f();
-		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(size);
-
+		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(model.getWidth() , model.getHeight(), 1);
+		pos.scale(size);
 		target = projection.mul(pos, target);
+		
 		return target;
 	}
 
@@ -89,10 +89,10 @@ public class Background implements Drawable{
 
 	@Override
 	public void update() {
-		if(win.hasResized()) {
-			projection = new Matrix4f().setOrtho2D(-win.getWidth() / 2, win.getWidth() / 2, -win.getHeight() / 2,
-					win.getHeight() / 2);
-		}
+//		if(win.hasResized()) {
+//			projection = new Matrix4f().setOrtho2D(-win.getWidth() / 2, win.getWidth() / 2, -win.getHeight() / 2,
+//					win.getHeight() / 2);
+//		}
 		// TODO Auto-generated method stub
 		
 	}

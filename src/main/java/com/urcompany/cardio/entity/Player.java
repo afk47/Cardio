@@ -17,7 +17,7 @@ public class Player extends Entity{
 	public Player(Window window) {
 		super(window);
 		doDefaultAnimation();
-		size = 400;
+		size = 2;
 		setPosition(-300, -300);
 	}
 	

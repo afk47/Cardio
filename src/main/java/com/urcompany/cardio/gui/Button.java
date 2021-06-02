@@ -1,17 +1,15 @@
-package com.urcompany.cardio.entity;
+package com.urcompany.cardio.gui;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
-import com.urcompany.cardio.Main;
-import com.urcompany.cardio.gui.Drawable;
-import com.urcompany.cardio.gui.Window;
+import com.urcompany.cardio.controllers.Input;
 import com.urcompany.cardio.texture.AnimationLoader;
 import com.urcompany.cardio.texture.Model;
 import com.urcompany.cardio.texture.Texture;
 import com.urcompany.cardio.texture.TexturedModel;
 
-public abstract class Entity implements Drawable {
+public class Button implements Drawable, Hoverable {
 
 	protected Matrix4f projection;
 	private float[] position = { 0, 0, 0 };
@@ -24,38 +22,33 @@ public abstract class Entity implements Drawable {
 	protected float animationTimer = 0;
 	protected float animationLength = 1;
 	protected boolean animationCompleted = false;
-	protected String currentAnimation = "";
+	protected String currentAnimation = "Button";
 	private AnimationLoader animLoader = new AnimationLoader();
 	protected float lastFrame;
 	protected TexturedModel model = new TexturedModel();
 	protected boolean flippedHorizontal = false;
+	private Input input;
+	private int count = 0;
+
+	public Button(Window w) {
+		win = w;
+		input = win.getInput();
+		projection = new Matrix4f().setOrtho2D(-win.getWidth() / 2, win.getWidth() / 2, -win.getHeight() / 2,
+				win.getHeight() / 2);
+		setAnimation("Button", 1);
+		setFrame(0);
+		size = 5;
+	}
 
 	@Override
 	public void update() {
-//		if (win.hasResized()) {
-//			projection = new Matrix4f().setOrtho2D(-win.getWidth() / 2, win.getWidth() / 2, -win.getHeight() / 2,
-//					win.getHeight() / 2);
-//		}
-
-		lastFrame = currentframe;
-		animationTimer += Main.getPassed();
-
-		if (animationTimer >= animationLength) {
-			animationTimer = 0;
-			animationCompleted = true;
+		Vector3f mouse = input.getMousePosition();
+		// System.out.println(mouse);
+		if (translate().testPoint(mouse.x, mouse.y, mouse.z)) {
+			System.out.println("Hovering");
+			System.out.println(count++);
 		}
-
-		currentframe = frames * (animationTimer / animationLength);
-
 	}
-
-	public Entity(Window window) {
-		win = window;
-		projection = new Matrix4f().setOrtho2D(-win.getWidth() / 2, win.getWidth() / 2, -win.getHeight() / 2,
-				win.getHeight() / 2);
-	}
-
-	protected abstract void doDefaultAnimation();
 
 	@Override
 	public void bind(int sampler) {
@@ -71,16 +64,17 @@ public abstract class Entity implements Drawable {
 		if (flippedHorizontal) {
 			target.scale(-1, 1, 1);
 		}
+		// System.out.println(target);
 		return target;
 	}
 
 	public void flipHorizontal() {
 		target = new Matrix4f();
-		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(animLoader.getFrameWidth() , animLoader.getFrameHeight(), 1);
+		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(size);
 
 		pos.scale(-1, 0, -1);
 		target = projection.mul(pos, target);
-
+		flippedHorizontal = true;
 	}
 
 	@Override
@@ -142,4 +136,5 @@ public abstract class Entity implements Drawable {
 	public float[] getPosition() {
 		return position;
 	}
+
 }

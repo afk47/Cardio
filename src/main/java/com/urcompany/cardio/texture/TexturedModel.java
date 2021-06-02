@@ -54,6 +54,14 @@ public class TexturedModel {
 		texture.bind(i);
 	}
 	
+	public int getWidth() {
+		return texture.getTexture().getWidth();
+	}
+
+	public int getHeight() {
+		return texture.getTexture().getHeight();
+	}
+	
 
 
 }

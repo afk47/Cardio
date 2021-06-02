@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL;
 import com.urcompany.cardio.controllers.Timer;
 import com.urcompany.cardio.entity.Player;
 import com.urcompany.cardio.gui.Background;
+import com.urcompany.cardio.gui.Button;
 import com.urcompany.cardio.gui.Drawable;
 import com.urcompany.cardio.gui.Window;
 import com.urcompany.cardio.texture.Renderer;
@@ -42,6 +43,7 @@ public class Main implements Runnable {
 	private ArrayList<Drawable> drawables = new ArrayList<Drawable>(); // List of all drawables where the lower the
 																		// index the farther back it is Example:
 																		// background is furthest back
+	private Button bttn;
 
 	/*
 	 * creates new Main Thread and starts it
@@ -68,13 +70,16 @@ public class Main implements Runnable {
 		GL.createCapabilities();
 		p1 = new Player(win);
 		bg = new Background(win);
-
+		
+		bttn = new Button(win);
+		
 		renderer = new Renderer();
 
 		glEnable(GL_TEXTURE_2D);
 
 		drawables.add(bg);
 		drawables.add(p1);
+		drawables.add(bttn);
 	}
 
 	/*
@@ -95,8 +100,12 @@ public class Main implements Runnable {
 	 * updates screen and checks for new events
 	 * 
 	 */
-	private void update() {
+	private void update() { // A Timer that keeps track of how long since this was last called in Seconds
+		double time_2 = Timer.getTime();
+		passed = time_2 - time;
+
 		win.update();
+
 		if (win.getInput().isKeyReleased(GLFW_KEY_SPACE)) {// temporary to test animation system
 			p1.attack();
 		}
@@ -126,23 +135,20 @@ public class Main implements Runnable {
 		if (win.getInput().isKeyDown(GLFW_KEY_S)) {// temporary to test image translation
 			p1.idle();
 		}
-		
-		if(p1.getPosition()[1] >= -300 && !p1.getState().equals("Jump")) {
+
+		if (p1.getPosition()[1] >= -300 && !p1.getState().equals("Jump")) {
 			p1.addPosition(new float[] { 0f, -20f, 0f });
 		}
+
 		if (win.getInput().isKeyPressed(GLFW_KEY_ESCAPE) || win.shouldClose()) {// window close shortcut (also
 																				// temporary)
 			running = false;
 		}
 
-		// A Timer that keeps track of how long since this was last called in Seconds
-		double time_2 = Timer.getTime();
-		passed = time_2 - time;
-		time = time_2;
-
 		for (Drawable d : drawables) {// Iterates through all drawables and updates them in order
 			d.update();
 		}
+		time = time_2;
 	}
 
 	/*
