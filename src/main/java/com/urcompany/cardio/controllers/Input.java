@@ -18,6 +18,7 @@ public class Input {
 	private static int[] winWidth = new int[1], winHeight = new int[1];
 
 	public Input(long window) {
+		
 		this.window = window;
 		this.keys = new boolean[GLFW_KEY_LAST];
 		for (int i = 0; i < GLFW_KEY_LAST; i++)

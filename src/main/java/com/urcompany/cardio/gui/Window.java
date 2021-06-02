@@ -17,9 +17,12 @@ import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 import java.nio.IntBuffer;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,7 +69,9 @@ public class Window {
 				width = argwidth;
 				height = argheight;
 				hasResized = true;
+				setSize(width,height);
 
+                GL11.glViewport(0, 0, width, height);
 			}
 		};
 
@@ -85,7 +90,9 @@ public class Window {
 			logger.error("Failed to initialize window");
 			System.exit(1);
 		}
-
+		glfwGetWindowSize(glfwGetPrimaryMonitor(), widthp, heightp);
+		System.out.print(widthp);
+		
 		window = glfwCreateWindow(width, height, title, fullscreen ? glfwGetPrimaryMonitor() : 0, 0);
 
 		if (window == 0)
@@ -99,7 +106,7 @@ public class Window {
 			glfwShowWindow(window);
 
 		} else {
-			setSize(vid.width(), vid.height());
+			setSize(widthp[0], heightp[0]);
 		}
 		input = new Input(window);
 

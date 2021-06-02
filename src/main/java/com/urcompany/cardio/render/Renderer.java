@@ -1,17 +1,10 @@
-package com.urcompany.cardio.texture;
+package com.urcompany.cardio.render;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 import static org.lwjgl.opengl.GL11.*;
 
 import java.util.ArrayList;
 
-import org.joml.Matrix4f;
-import org.joml.Vector3f;
-
-import com.urcompany.cardio.Main;
-import com.urcompany.cardio.controllers.*;
 import com.urcompany.cardio.gui.*;
-import com.urcompany.cardio.texture.*;
 
 public class Renderer {
 	private Shader shader;
@@ -32,10 +25,11 @@ public class Renderer {
 			shader.setUniform("sampler", 0);
 			shader.setUniform("projection", drawable.translate());
 			drawable.getModel().render();
-			
 		}
-		// TODO Create render method with @Param Drawable which is anything that has to
-		// be drawn on screen
+	}
+	
+	public Shader getShader() {
+		return shader;
 	}
 
 	public void render() {

@@ -25,6 +25,11 @@ public class AnimationLoader {
 	private int frames = 0;
 	private int currentFrame = 0;
 
+	float fx =0;
+	float fy =0;
+	float fh =0;
+	float fw =0;
+
 	public void loadAnimation(String s) {
 		animation = s;
 		try {
@@ -61,10 +66,7 @@ public class AnimationLoader {
 	}
 
 	public void loadFrame(int i) {
-		float fx;
-		float fy;
-		float fh;
-		float fw;
+
 		try {
 
 			File json = new File("src/main/resources/textures/Sprites/" + animation + ".json");
@@ -74,27 +76,32 @@ public class AnimationLoader {
 				String jsonString = "" + node.get("frames");
 				node = new ObjectMapper().readValue(jsonString, ObjectNode.class);
 				if (node.has(animation + "-" + i + ".png")) {
+					frames = node.size();
 					jsonString = "" + node.get(animation + "-" + i + ".png");
 					node = new ObjectMapper().readValue(jsonString, ObjectNode.class);
 					if (node.has("frame")) {
 						jsonString = "" + node.get("frame");
 						node = new ObjectMapper().readValue(jsonString, ObjectNode.class);
 
-						fx =(float) node.get("x").asInt();// frame x coord
-						fy =(float) node.get("y").asInt();// frame y coord
-						fh =(float) node.get("h").asInt();// frame height
-						fw =(float) node.get("w").asInt();// frame width
+						fx = (float) node.get("x").asInt();// frame x coord
+						fy = (float) node.get("y").asInt();// frame y coord
+						fh = (float) node.get("h").asInt();// frame height
+						fw = (float) node.get("w").asInt();// frame width
 
 						// converts frame coords to usable frame coords (percentage)
 						float x1 = fx / w;
 						float x2 = (fx + fw) / w;
 						float y1 = fy / h;
 						float y2 = (fy + fh) / h;
-						
-						texture_coords = new float[] {x1,y1,x2,y1,x2,y2,x1,y2,};
+
+						texture_coords = new float[] { x1, y1, x2, y1, x2, y2, x1, y2, };
+
 					}
 				}
+				jsonString = null;
 			}
+			json = null;
+			node = null;
 
 		} catch (JsonMappingException e) {
 			logger.debug("JsonMappingException", e);
@@ -113,6 +120,18 @@ public class AnimationLoader {
 
 	public float[] getFrameCoordinates() {
 		return texture_coords;
+	}
+
+	public int getTotalFrames() {
+		return frames;
+	}
+	
+	public float getFrameHeight() {
+		return fh;
+	}
+	
+	public float getFrameWidth() {
+		return fw;
 	}
 
 }
