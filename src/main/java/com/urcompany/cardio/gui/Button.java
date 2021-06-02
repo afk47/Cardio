@@ -43,10 +43,9 @@ public class Button implements Drawable, Hoverable {
 	@Override
 	public void update() {
 		Vector3f mouse = input.getMousePosition();
-		// System.out.println(mouse);
 		if (translate().testPoint(mouse.x, mouse.y, mouse.z)) {
 			System.out.println("Hovering");
-			System.out.println(count++);
+			System.out.println(count++);  //FOR TEMPORARY USE ONLY REMOVE AS SOON AS HOVERING WORKS CORRECTLY
 		}
 	}
 
@@ -64,7 +63,6 @@ public class Button implements Drawable, Hoverable {
 		if (flippedHorizontal) {
 			target.scale(-1, 1, 1);
 		}
-		// System.out.println(target);
 		return target;
 	}
 
