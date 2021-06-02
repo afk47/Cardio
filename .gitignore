@@ -1,0 +1,10 @@
+/bin
+/target
+.settings/
+.classpath
+.project
+.DS_Store
+*.swp
+release.properties
+pom.xml.releaseBackup
+pom.xml.tag
