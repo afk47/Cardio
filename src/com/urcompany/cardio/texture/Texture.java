@@ -8,7 +8,7 @@ public class Texture {
 	private TextureLoader texture;
 	public Texture(String file) {
 		textureID = GL11.glGenTextures();
-		texture = TextureLoader.loadImage("src/main/resources/textures" + file);
+		texture = TextureLoader.loadImage("src/resources/textures" + file);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);

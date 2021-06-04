@@ -1,9 +1,9 @@
 package com.urcompany.cardio.controllers;
 
-import com.urcompany.cardio.entity.Player;
 import com.urcompany.cardio.gui.Scene;
 import com.urcompany.cardio.gui.Window;
 import static org.lwjgl.glfw.GLFW.*;
+
 public class SceneController {
 
 	private Window window;
