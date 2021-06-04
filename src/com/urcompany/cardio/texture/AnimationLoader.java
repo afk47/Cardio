@@ -34,7 +34,7 @@ public class AnimationLoader {
 		animation = s;
 		try {
 
-			File json = new File("src/main/resources/textures/Sprites/" + s + ".json");
+			File json = new File("src/resources/textures/Sprites/" + s + ".json");
 			ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
 
 			frames = node.get("frames").size();
@@ -69,7 +69,7 @@ public class AnimationLoader {
 
 		try {
 
-			File json = new File("src/main/resources/textures/Sprites/" + animation + ".json");
+			File json = new File("src/resources/textures/Sprites/" + animation + ".json");
 			ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
 
 			if (node.has("frames")) {

@@ -29,6 +29,7 @@ public class Button implements Drawable, Hoverable {
 	protected boolean flippedHorizontal = false;
 	private Input input;
 	private int count = 0;
+	private boolean hovering = false;
 
 	public Button(Window w) {
 		win = w;
@@ -43,10 +44,35 @@ public class Button implements Drawable, Hoverable {
 	@Override
 	public void update() {
 		Vector3f mouse = input.getMousePosition();
+
 		if (translate().testPoint(mouse.x, mouse.y, mouse.z)) {
-			System.out.println("Hovering");
-			System.out.println(count++);  //FOR TEMPORARY USE ONLY REMOVE AS SOON AS HOVERING WORKS CORRECTLY
+			if (!hovering) {
+				hovering = true;
+				hoverStart();
+			}
+			hoverCallback();
+		} else {
+			if (hovering) {
+				hovering = false;
+				hoverEnd();
+			}
 		}
+	}
+
+	@Override
+	public void hoverStart() {
+		System.out.println("hover start called");
+	}
+
+	@Override
+	public void hoverEnd() {
+		System.out.println("hover end called");
+	}
+
+	@Override
+	public void hoverCallback() {
+		System.out.println("Hovering");
+		//System.out.println(count++);  //FOR TEMPORARY USE ONLY REMOVE AS SOON AS HOVERING WORKS CORRECTLY
 	}
 
 	@Override
@@ -54,7 +80,6 @@ public class Button implements Drawable, Hoverable {
 		model.bind(sampler);
 	}
 
-	@Override
 	public Matrix4f translate() {
 		target = new Matrix4f();
 		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(animLoader.getFrameWidth() , animLoader.getFrameHeight(), 1);
@@ -69,7 +94,6 @@ public class Button implements Drawable, Hoverable {
 	public void flipHorizontal() {
 		target = new Matrix4f();
 		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(size);
-
 		pos.scale(-1, 0, -1);
 		target = projection.mul(pos, target);
 		flippedHorizontal = true;
@@ -85,9 +109,7 @@ public class Button implements Drawable, Hoverable {
 		currentAnimation = file;
 		animationLength = length;
 		setTexture(new Texture("/Sprites/" + file + ".png"));
-
 		animationCompleted = false;
-
 	}
 
 	@Override
@@ -116,7 +138,6 @@ public class Button implements Drawable, Hoverable {
 	@Override
 	public void setTexture(Texture mat) {
 		model.setTexture(mat);
-		;
 	}
 
 	@Override

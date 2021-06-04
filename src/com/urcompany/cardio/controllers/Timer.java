@@ -2,9 +2,12 @@ package com.urcompany.cardio.controllers;
 
 public class Timer {
 	/*
-	 * TODO Find a better way....
+	 * TODO: Find a better way....
+	 *
+	 *  gets time in seconds
 	 */
 	public static double getTime() {
 		return (double)System.nanoTime() / (double)1000000000L;
 	}
+
 }
