@@ -2,12 +2,18 @@ package com.urcompany.cardio.gui;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import com.urcompany.cardio.controllers.Input;
 import com.urcompany.cardio.texture.AnimationLoader;
 import com.urcompany.cardio.texture.Model;
 import com.urcompany.cardio.texture.Texture;
 import com.urcompany.cardio.texture.TexturedModel;
+import static org.lwjgl.opengl.GL11.*;
+
+import java.nio.IntBuffer;
+
+import org.lwjgl.opengl.*;
 
 public class Button implements Drawable, Hoverable {
 
@@ -44,8 +50,10 @@ public class Button implements Drawable, Hoverable {
 	@Override
 	public void update() {
 		Vector3f mouse = input.getMousePosition();
+		System.out.println(invertProj(translate()));
+		System.out.println(mouse.x / (win.getWidth() / 2) + " " + mouse.y / (win.getHeight() / 2));
 
-		if (translate().testPoint(mouse.x, mouse.y, mouse.z)) {
+		if (invertProj(translate()).testPoint(mouse.x / (win.getWidth() / 2), mouse.y / (win.getHeight() / 2), 0)) {
 			if (!hovering) {
 				hovering = true;
 				hoverStart();
@@ -72,7 +80,8 @@ public class Button implements Drawable, Hoverable {
 	@Override
 	public void hoverCallback() {
 		System.out.println("Hovering");
-		//System.out.println(count++);  //FOR TEMPORARY USE ONLY REMOVE AS SOON AS HOVERING WORKS CORRECTLY
+		// System.out.println(count++); //FOR TEMPORARY USE ONLY REMOVE AS SOON AS
+		// HOVERING WORKS CORRECTLY
 	}
 
 	@Override
@@ -82,11 +91,12 @@ public class Button implements Drawable, Hoverable {
 
 	public Matrix4f translate() {
 		target = new Matrix4f();
-		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(animLoader.getFrameWidth() , animLoader.getFrameHeight(), 1);
+		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(animLoader.getFrameWidth(),
+				animLoader.getFrameHeight(), 0.5f);
 		pos.scale(size);
 		target = projection.mul(pos, target);
 		if (flippedHorizontal) {
-			target.scale(-1, 1, 1);
+			target.scale(-1, 1, 0.5f);
 		}
 		return target;
 	}
@@ -94,7 +104,7 @@ public class Button implements Drawable, Hoverable {
 	public void flipHorizontal() {
 		target = new Matrix4f();
 		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(size);
-		pos.scale(-1, 0, -1);
+		pos.scale(-1, 0, 0.5f);
 		target = projection.mul(pos, target);
 		flippedHorizontal = true;
 	}
@@ -154,6 +164,13 @@ public class Button implements Drawable, Hoverable {
 
 	public float[] getPosition() {
 		return position;
+	}
+
+	private Matrix4f invertProj(Matrix4f matrix) {
+		    Matrix4f invertedProjection = matrix.invert(new Matrix4f());  
+		    return invertedProjection;
+		   // return new Vector4f(eyeCoords.x/eyeCoords.w, eyeCoords.y/eyeCoords.w, eyeCoords.z/eyeCoords.w, 0.0f);
+		
 	}
 
 }
