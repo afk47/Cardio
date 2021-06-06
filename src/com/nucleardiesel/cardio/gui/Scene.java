@@ -1,16 +1,19 @@
 package com.nucleardiesel.cardio.gui;
 
+import com.nucleardiesel.cardio.controllers.SceneController;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class Scene {
 
-	private ArrayList<Drawable> drawables = new ArrayList<Drawable>();
-	private String name;
-	protected Window win;
+	private final ArrayList<Drawable> drawables = new ArrayList<Drawable>();
+	private final String name;
+	protected SceneController controller;	// SceneController and Window available to all scenes.
+	protected Window window;
 	
-	public Scene(Window w, String name) {
+	public Scene(String name) {
 		this.name = name;
-		this.win = w;
 	}
 
 	public abstract void init();
@@ -24,21 +27,31 @@ public abstract class Scene {
 		}
 	}
 
-	public ArrayList<Drawable> getContents(){
-		return drawables;
-	}
-
-	public Window getWindow() {
-		return win;
-	}
-
 	public void addDrawable(Drawable d) {
 		drawables.add(d);
 	}
 
 	public void addDrawables(Drawable[] ds) {
-		for (Drawable d : ds) {
-			drawables.add(d);
-		}
+		drawables.addAll(Arrays.asList(ds));
+	}
+
+	public void setController(SceneController c) {
+		controller = c;
+	}
+
+	public void setWindow(Window w) {
+		window = w;
+	}
+
+	public ArrayList<Drawable> getContents(){
+		return drawables;
+	}
+
+	public Window getWindow() {
+		return controller.getWindow();
+	}
+
+	public String getName() {
+		return name;
 	}
 }

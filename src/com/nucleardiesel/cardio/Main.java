@@ -4,13 +4,15 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.glEnable;
 
+import com.nucleardiesel.cardio.controllers.SceneController;
 import org.lwjgl.opengl.GL;
-
 import com.nucleardiesel.cardio.controllers.Timer;
 import com.nucleardiesel.cardio.gui.Scene;
 import com.nucleardiesel.cardio.gui.Window;
+
 import com.nucleardiesel.cardio.scenes.Test;
-import com.nucleardiesel.cardio.texture.Renderer;
+import com.nucleardiesel.cardio.scenes.SwitchTest1;
+import com.nucleardiesel.cardio.scenes.SwitchTest2;
 
 public class Main implements Runnable {
 
@@ -20,18 +22,14 @@ public class Main implements Runnable {
 	private boolean running = false;
 	public static Window win;
 
-	private String title = "Cardio";
-	public static Renderer renderer;
+	private final String title = "Cardio";
+	SceneController controller;
 
 	long frame_cap = 1000 / 60;
 	double time = Timer.getTime();
 	double frame_time = Timer.getTime();
 	int frames = 0;
 	private static double passed;
-
-	//temp
-	public Scene[] scenes;
-	public int currentScene = 0;
 
 	/*
 	 * creates new Main Thread and starts it
@@ -55,10 +53,8 @@ public class Main implements Runnable {
 		win.createWindow(title);
 		GL.createCapabilities();
 		glEnable(GL_TEXTURE_2D);
-		renderer = new Renderer();
 
-		//temp
-		scenes = new Scene[] {new Test(win)};
+		controller = new SceneController(win, new Scene[] {new Test(), new SwitchTest1(), new SwitchTest2()});
 	}
 
 	/*
@@ -70,7 +66,7 @@ public class Main implements Runnable {
 		init();
 		while (running) {
 			update();
-			render();
+			controller.render();
 			win.swapBuffers();
 		}
 	}
@@ -102,18 +98,9 @@ public class Main implements Runnable {
 		}
 
 		win.update();
-
-		scenes[currentScene].updateScene();
+		controller.update();
 
 		time = time_2;
-	}
-
-	/*
-	 * Renders the main screen
-	 *
-	 */
-	private void render() {
-		renderer.render(scenes[currentScene].getContents());
 	}
 
 	/*
