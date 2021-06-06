@@ -33,4 +33,6 @@ public interface Drawable {
 	void updateModel(Model newModel);
 
 	void addPosition(float[] v);
+
+	String getState();
 }

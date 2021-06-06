@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public abstract class Scene {
 
-	private final ArrayList<Drawable> drawables = new ArrayList<Drawable>();
+	private ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 	private final String name;
 	protected SceneController controller;	// SceneController and Window available to all scenes.
 	protected Window window;
@@ -29,6 +29,15 @@ public abstract class Scene {
 
 	public void addDrawable(Drawable d) {
 		drawables.add(d);
+	}
+	
+	public void setDrawable(Drawable d, int index) {
+		drawables.set(index, d);
+	}
+	
+	public void removeDrawable(int index) {
+		drawables.remove(index);
+		
 	}
 
 	public void addDrawables(Drawable[] ds) {

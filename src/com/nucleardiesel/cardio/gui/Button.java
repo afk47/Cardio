@@ -172,4 +172,10 @@ public class Button implements Drawable, Hoverable {
 
 	}
 
+	@Override
+	public String getState() {
+		// TODO Auto-generated method stub
+		return currentAnimation;
+	}
+
 }

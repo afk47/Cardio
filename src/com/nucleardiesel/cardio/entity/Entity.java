@@ -14,7 +14,7 @@ import com.nucleardiesel.cardio.texture.TexturedModel;
 public abstract class Entity implements Drawable {
 
 	protected Matrix4f projection;
-	private float[] position = { 0, 0, 0 };
+	protected float[] position = { 0, 0, 0 };
 	protected float size = 400;
 	private Window win;
 	protected float currentframe = 0;
@@ -67,6 +67,7 @@ public abstract class Entity implements Drawable {
 		target = new Matrix4f();
 		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(animLoader.getFrameWidth() , animLoader.getFrameHeight(), 1);
 		pos.scale(size);
+		
 		target = projection.mul(pos, target);
 		if (flippedHorizontal) {
 			target.scale(-1, 1, 1);
@@ -77,7 +78,7 @@ public abstract class Entity implements Drawable {
 	public void flipHorizontal() {
 		target = new Matrix4f();
 		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(animLoader.getFrameWidth() , animLoader.getFrameHeight(), 1);
-
+		
 		pos.scale(-1, 0, -1);
 		target = projection.mul(pos, target);
 

@@ -11,8 +11,6 @@ import com.nucleardiesel.cardio.gui.Scene;
 import com.nucleardiesel.cardio.gui.Window;
 
 import com.nucleardiesel.cardio.scenes.Test;
-import com.nucleardiesel.cardio.scenes.SwitchTest1;
-import com.nucleardiesel.cardio.scenes.SwitchTest2;
 
 public class Main implements Runnable {
 
@@ -23,7 +21,7 @@ public class Main implements Runnable {
 	public static Window win;
 
 	private final String title = "Cardio";
-	SceneController controller;
+	private static SceneController controller;
 
 	long frame_cap = 1000 / 60;
 	double time = Timer.getTime();
@@ -54,7 +52,7 @@ public class Main implements Runnable {
 		GL.createCapabilities();
 		glEnable(GL_TEXTURE_2D);
 
-		controller = new SceneController(win, new Scene[] {new Test(), new SwitchTest1(), new SwitchTest2()});
+		controller = new SceneController(win, new Scene[] {new Test()});
 	}
 
 	/*
@@ -112,6 +110,10 @@ public class Main implements Runnable {
 
 	public static double getPassed() {
 		return passed;
+	}
+	
+	public static SceneController getController() {
+		return controller;
 	}
 
 }

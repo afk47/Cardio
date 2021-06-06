@@ -98,4 +98,11 @@ public class Background implements Drawable{
 	}
 
 
+	@Override
+	public String getState() {
+		// TODO Auto-generated method stub
+		return "Background";
+	}
+
+
 }

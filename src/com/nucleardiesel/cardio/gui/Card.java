@@ -10,6 +10,7 @@ import java.nio.IntBuffer;
 
 import org.lwjgl.opengl.*;
 
+import com.nucleardiesel.cardio.Main;
 import com.nucleardiesel.cardio.controllers.Input;
 import com.nucleardiesel.cardio.texture.AnimationLoader;
 import com.nucleardiesel.cardio.texture.Model;
@@ -37,7 +38,8 @@ public class Card implements Drawable, Hoverable {
 	private Input input;
 	private int count = 0;
 	private boolean hovering = false;
-
+	private boolean played = false;
+	
 	public Card(Window w) {
 		win = w;
 		input = win.getInput();
@@ -86,7 +88,7 @@ public class Card implements Drawable, Hoverable {
 			
 			hovering = false;
 			hoverEnd();
-			
+			Main.getController().getCurrentScene();
 			playcard();
 		}
 		
@@ -94,6 +96,7 @@ public class Card implements Drawable, Hoverable {
 
 	private void playcard() {
 			//TODO implement card playing 
+			played = true;
 			position[1] = -9999; //Removes Card From Screen Must Implement
 	}
 
@@ -186,5 +189,16 @@ public class Card implements Drawable, Hoverable {
 		// eyeCoords.z/eyeCoords.w, 0.0f);
 
 	}
+	
+	public boolean beenPlayed() {
+		return played;
+	}
+	
+	@Override
+	public String getState() {
+		// TODO Auto-generated method stub
+		return currentAnimation;
+	}
+
 
 }

@@ -2,6 +2,7 @@ package com.nucleardiesel.cardio.scenes;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+import com.nucleardiesel.cardio.entity.Fireball;
 import com.nucleardiesel.cardio.entity.Player;
 import com.nucleardiesel.cardio.gui.*;
 
@@ -69,6 +70,18 @@ public class Test extends Scene {
 		if (window.getInput().isKeyPressed(GLFW_KEY_LEFT)) {
 			controller.previousScene(); // switch to previous scene
 		}
+		
+		if(card.beenPlayed()) {
+			Fireball fireball = new Fireball(window,this,getContents().size());
+			addDrawable(fireball);
+			card = new Card(window);
+			setDrawable(card, 2);
+		}
+		
+		if(getContents().get(getContents().size()-1).getState().equals("NULL")) {//Checks for flag of NULL and removes last case of a object with flag BAD IMPLEMENTATION JUST TO PREVENT LAG ATM
+			removeDrawable(getContents().size()-1);
+		}
+		
 
     }
 }
