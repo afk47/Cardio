@@ -18,28 +18,35 @@ import com.nucleardiesel.cardio.texture.Texture;
 import com.nucleardiesel.cardio.texture.TexturedModel;
 
 public class Card implements Drawable, Hoverable {
-
+	
+	private Window win;
+	protected TexturedModel model = new TexturedModel();
+	private Input input;
+	
+	private Matrix4f target;
+	private Matrix4f pos;
 	protected Matrix4f projection;
 	private float[] position = { -700, -500, 0 };
 	protected float size = 400;
-	private Window win;
+	protected boolean flippedHorizontal = false;
+	
+
 	protected float currentframe = 0;
 	protected float frames = 0;
-	private Matrix4f target;
-	private Matrix4f pos;
+	protected float lastFrame;
 	protected float animationTimer = 0;
 	protected float animationLength = 1;
 	protected boolean animationCompleted = false;
 	protected String currentAnimation = "Card";
 	private AnimationLoader animLoader = new AnimationLoader();
-	protected float lastFrame;
-	protected TexturedModel model = new TexturedModel();
-	protected boolean flippedHorizontal = false;
-	private Input input;
-	private int count = 0;
+
+	
 	private boolean hovering = false;
 	private boolean played = false;
+	private float cooldown = 1f;
 	
+	private int damage = 5;
+
 	public Card(Window w) {
 		win = w;
 		input = win.getInput();
@@ -47,7 +54,8 @@ public class Card implements Drawable, Hoverable {
 				win.getHeight() / 2);
 		setAnimation("Card", 0);
 		setFrame(0);
-		size = .2f;
+		size = .05f;
+		played = false;
 	}
 
 	@Override
@@ -69,7 +77,7 @@ public class Card implements Drawable, Hoverable {
 
 	@Override
 	public void hoverStart() {
-		
+
 	}
 
 	@Override
@@ -79,25 +87,25 @@ public class Card implements Drawable, Hoverable {
 
 	@Override
 	public void hoverCallback() {
-		if(position[1] < -400) {
-			position[1] +=5;
+		if (position[1] < -400) {
+			position[1] += 5;
 		}
-		
-		if(input.isMouseButtonDown(0)) {
-			System.out.println("CLICKED"); 
-			
+
+		if (input.isMouseButtonReleased(0)) {
+			System.out.println("CLICKED");
+
 			hovering = false;
 			hoverEnd();
 			Main.getController().getCurrentScene();
 			playcard();
 		}
-		
+
 	}
 
 	private void playcard() {
-			//TODO implement card playing 
-			played = true;
-			position[1] = -9999; //Removes Card From Screen Must Implement
+		// TODO implement card playing
+		played = true;
+		position[1] = -9999; // Removes Card From Screen Must Implement
 	}
 
 	@Override
@@ -107,13 +115,10 @@ public class Card implements Drawable, Hoverable {
 
 	public Matrix4f translate() {
 		target = new Matrix4f();
-		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(animLoader.getFrameWidth(),
-				animLoader.getFrameHeight(), 0.5f);
+		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(model.getWidth(), model.getHeight(), 1);
 		pos.scale(size);
 		target = projection.mul(pos, target);
-		if (flippedHorizontal) {
-			target.scale(-1, 1, 0.5f);
-		}
+
 		return target;
 	}
 
@@ -189,16 +194,30 @@ public class Card implements Drawable, Hoverable {
 		// eyeCoords.z/eyeCoords.w, 0.0f);
 
 	}
-	
+
 	public boolean beenPlayed() {
 		return played;
 	}
-	
+
 	@Override
 	public String getState() {
 		// TODO Auto-generated method stub
 		return currentAnimation;
 	}
 
+	public float getCooldown() {
+		// TODO Auto-generated method stub
+		return cooldown;
+	}
+
+	public int getDamage() {
+		return damage;
+	}
+
+	@Override
+	public boolean shouldDestroy() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

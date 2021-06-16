@@ -1,5 +1,7 @@
 package com.nucleardiesel.cardio.gui;
 
+import javax.swing.text.Position;
+
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
@@ -7,27 +9,28 @@ import com.nucleardiesel.cardio.texture.Model;
 import com.nucleardiesel.cardio.texture.Texture;
 import com.nucleardiesel.cardio.texture.TexturedModel;
 
-public class Background implements Drawable{
+public class Healthbar implements Drawable {
 
-	TexturedModel model = new TexturedModel("/images/Background.png");
-	
+	TexturedModel model = new TexturedModel("/images/Healthbar.png");
+
 	Matrix4f pos;
 	Matrix4f target;
 	protected Matrix4f projection;
 	float size = 1;
-	float[] position;
+	float[] position = new float[]{-100,100,0};
 	private Window win;
+	private int health = 1000;
+	private int maxHP = 1000;
 	
-	public Background(Window window) {
+	public Healthbar(Window window) {
 		win = window;
 		projection = new Matrix4f().setOrtho2D(-window.getWidth() / 2, window.getWidth() / 2, -window.getHeight() / 2,
 				window.getHeight() / 2);
-		size = 1.2f;
-		position = new float[]{0, 400, 0};
+		size = 4f;
+		position = new float[]{-600, 500, 0};
 		// TODO Auto-generated constructor stub
 	}
-
-
+	
 	@Override
 	public void bind(int sampler) {
 		model.bind(sampler);
@@ -35,22 +38,22 @@ public class Background implements Drawable{
 
 	@Override
 	public Matrix4f translate() {
+		
 		target = new Matrix4f();
-		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(model.getWidth() , model.getHeight(), 1);
+		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(((float)health/maxHP)*100,5, 1);
 		pos.scale(size);
 		target = projection.mul(pos, target);
-		
+
 		return target;
 	}
 
 	@Override
 	public void setAnimation(String file, float length) {
-		
+
 	}
 
 	@Override
 	public void setFrame(int f) {
-		
 
 	}
 
@@ -86,24 +89,32 @@ public class Background implements Drawable{
 		}
 	}
 
-
 	@Override
 	public void update() {
-//		if(win.hasResized()) {
-//			projection = new Matrix4f().setOrtho2D(-win.getWidth() / 2, win.getWidth() / 2, -win.getHeight() / 2,
-//					win.getHeight() / 2);
-//		}
-		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	@Override
 	public String getState() {
 		// TODO Auto-generated method stub
-		return "Background";
+		return "Healthbar";
+	}
+	
+	public void setHP(int hp) {
+		health = hp;
+	}
+	
+	public int getHP() {
+		return health;
 	}
 
+	public int getMaxHP() {
+		return maxHP;
+	}
+
+	public void setMaxHP(int maxHP) {
+		this.maxHP = maxHP;
+	}
 
 	@Override
 	public boolean shouldDestroy() {
@@ -111,5 +122,5 @@ public class Background implements Drawable{
 		return false;
 	}
 
-
+	
 }

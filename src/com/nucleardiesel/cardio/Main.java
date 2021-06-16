@@ -9,7 +9,9 @@ import org.lwjgl.opengl.GL;
 import com.nucleardiesel.cardio.controllers.Timer;
 import com.nucleardiesel.cardio.gui.Scene;
 import com.nucleardiesel.cardio.gui.Window;
-
+import com.nucleardiesel.cardio.scenes.BattleScene;
+import com.nucleardiesel.cardio.scenes.SwitchTest1;
+import com.nucleardiesel.cardio.scenes.SwitchTest2;
 import com.nucleardiesel.cardio.scenes.Test;
 
 public class Main implements Runnable {
@@ -52,7 +54,7 @@ public class Main implements Runnable {
 		GL.createCapabilities();
 		glEnable(GL_TEXTURE_2D);
 
-		controller = new SceneController(win, new Scene[] {new Test()});
+		controller = new SceneController(win, new Scene[] {new BattleScene(), new SwitchTest1(),new SwitchTest2()});
 	}
 
 	/*

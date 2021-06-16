@@ -2,7 +2,7 @@ package com.nucleardiesel.cardio.controllers;
 
 import com.nucleardiesel.cardio.gui.Scene;
 import com.nucleardiesel.cardio.gui.Window;
-import com.nucleardiesel.cardio.texture.Renderer;
+import com.nucleardiesel.cardio.render.Renderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

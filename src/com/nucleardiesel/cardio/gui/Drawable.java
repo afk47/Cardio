@@ -35,4 +35,6 @@ public interface Drawable {
 	void addPosition(float[] v);
 
 	String getState();
+	
+	boolean shouldDestroy();
 }

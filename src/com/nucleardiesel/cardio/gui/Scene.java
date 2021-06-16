@@ -9,9 +9,9 @@ public abstract class Scene {
 
 	private ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 	private final String name;
-	protected SceneController controller;	// SceneController and Window available to all scenes.
+	protected SceneController controller; // SceneController and Window available to all scenes.
 	protected Window window;
-	
+
 	public Scene(String name) {
 		this.name = name;
 	}
@@ -22,22 +22,33 @@ public abstract class Scene {
 
 	public void updateScene() {
 		update();
+		int removeIndex = -1;
+		int i = 0;
 		for (Drawable d : drawables) {
 			d.update();
+			if (d.shouldDestroy()) {
+				removeIndex = i;
+				d = null;
+
+			}
+			i++;
+		}
+		if (removeIndex > -1) {
+			drawables.remove(removeIndex);
 		}
 	}
 
 	public void addDrawable(Drawable d) {
 		drawables.add(d);
 	}
-	
+
 	public void setDrawable(Drawable d, int index) {
 		drawables.set(index, d);
 	}
-	
+
 	public void removeDrawable(int index) {
 		drawables.remove(index);
-		
+
 	}
 
 	public void addDrawables(Drawable[] ds) {
@@ -52,7 +63,7 @@ public abstract class Scene {
 		window = w;
 	}
 
-	public ArrayList<Drawable> getContents(){
+	public ArrayList<Drawable> getContents() {
 		return drawables;
 	}
 

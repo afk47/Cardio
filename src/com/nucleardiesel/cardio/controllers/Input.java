@@ -1,6 +1,6 @@
 package com.nucleardiesel.cardio.controllers;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_LAST;
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFW.glfwGetCursorPos;
 import static org.lwjgl.glfw.GLFW.glfwGetKey;
 import static org.lwjgl.glfw.GLFW.glfwGetMouseButton;
@@ -16,7 +16,8 @@ public class Input {
 	private static Vector3f mousePos = new Vector3f();
 	private static double[] x = new double[1], y = new double[1];
 	private static int[] winWidth = new int[1], winHeight = new int[1];
-
+	static int oldState = GLFW_RELEASE;
+	
 	public Input(long window) {
 		
 		this.window = window;
@@ -38,7 +39,18 @@ public class Input {
 	}
 
 	public boolean isMouseButtonDown(int button) {
+		oldState  = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
 		return glfwGetMouseButton(window, button) == 1;
+	}
+	
+	public boolean isMouseButtonReleased(int button) {
+		int newState = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+		if (newState == GLFW_RELEASE && oldState == GLFW_PRESS) {
+			oldState = newState;
+			return true;
+		}
+		oldState = newState;
+		return false;
 	}
 
 	public Vector3f getMousePosition() {

@@ -178,4 +178,10 @@ public class Button implements Drawable, Hoverable {
 		return currentAnimation;
 	}
 
+	@Override
+	public boolean shouldDestroy() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -81,7 +81,7 @@ public abstract class Entity implements Drawable {
 		
 		pos.scale(-1, 0, -1);
 		target = projection.mul(pos, target);
-
+		flippedHorizontal = true;
 	}
 
 	@Override
@@ -142,5 +142,9 @@ public abstract class Entity implements Drawable {
 
 	public float[] getPosition() {
 		return position;
+	}
+	
+	public boolean shouldDestroy() {
+		return false;
 	}
 }
