@@ -12,6 +12,7 @@ import com.nucleardiesel.cardio.gui.Card;
 import com.nucleardiesel.cardio.gui.Drawable;
 import com.nucleardiesel.cardio.gui.Healthbar;
 import com.nucleardiesel.cardio.gui.Scene;
+import com.nucleardiesel.cardio.sound.SoundPlayer;
 
 public class BattleScene extends Scene {
 
@@ -28,6 +29,7 @@ public class BattleScene extends Scene {
 	private double time;
 	private Healthbar p1hp;
 	private Healthbar p2hp;
+	private SoundPlayer audioPlayer;
 
 	@Override
 	public void init() {
@@ -41,6 +43,12 @@ public class BattleScene extends Scene {
 		p2.flipHorizontal();
 		p2hp.addPosition(new float[] { 1200, 0, 0 });
 		addDrawables(new Drawable[] { bg, p1, p2, card, p1hp, p2hp });
+
+		//CREATES Audio Player Then Plays Sound at file location
+		audioPlayer = new SoundPlayer();
+		audioPlayer.addSound("src/resources/textures/sounds/jingles_STEEL07.ogg", true);
+		audioPlayer.play(0);
+
 	}
 
 	@Override
@@ -67,7 +75,7 @@ public class BattleScene extends Scene {
 				p2hp.addPosition(new float[] { card.getDamage() * 20 });
 			}
 			if (p2hp.getHP() <= 0 && !p2.getState().equals("Death")) {
-				
+
 				p2.death();
 			}
 			card = new Card(window);

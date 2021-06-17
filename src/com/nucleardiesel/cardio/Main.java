@@ -13,6 +13,7 @@ import com.nucleardiesel.cardio.scenes.BattleScene;
 import com.nucleardiesel.cardio.scenes.SwitchTest1;
 import com.nucleardiesel.cardio.scenes.SwitchTest2;
 import com.nucleardiesel.cardio.scenes.Test;
+import com.nucleardiesel.cardio.sound.SoundPlayer;
 
 public class Main implements Runnable {
 
@@ -95,6 +96,7 @@ public class Main implements Runnable {
 
 		if (win.getInput().isKeyPressed(GLFW_KEY_ESCAPE) || win.shouldClose()) { // window close shortcut (also temporary)
 			running = false;
+			SoundPlayer.destroy();
 		}
 
 		win.update();
