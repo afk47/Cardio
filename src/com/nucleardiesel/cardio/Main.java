@@ -76,8 +76,8 @@ public class Main implements Runnable {
 	 * updates screen and checks for new events
 	 *
 	 */
-	private void update() { // A Timer that keeps track of how long since this was last called in Seconds
-		double time_2 = Timer.getTime();
+	private void update() { 
+		double time_2 = Timer.getTime(); //Time in seconds
 		passed = time_2 - time;
 
 		// caps updates at 60 per second if no vsync. crappy way of doing it tho

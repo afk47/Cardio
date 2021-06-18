@@ -17,20 +17,21 @@ public class Healthbar implements Drawable {
 	Matrix4f target;
 	protected Matrix4f projection;
 	float size = 1;
-	float[] position = new float[]{-100,100,0};
+	float[] position = new float[] { -100, 100, 0 };
 	private Window win;
 	private int health = 1000;
 	private int maxHP = 1000;
+	private boolean leftJustified = true;
 	
 	public Healthbar(Window window) {
 		win = window;
 		projection = new Matrix4f().setOrtho2D(-window.getWidth() / 2, window.getWidth() / 2, -window.getHeight() / 2,
 				window.getHeight() / 2);
 		size = 4f;
-		position = new float[]{-600, 500, 0};
+		position = new float[] { -600, 500, 0 };
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public void bind(int sampler) {
 		model.bind(sampler);
@@ -38,9 +39,9 @@ public class Healthbar implements Drawable {
 
 	@Override
 	public Matrix4f translate() {
-		
+
 		target = new Matrix4f();
-		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(((float)health/maxHP)*100,5, 1);
+		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(((float) health / maxHP) * 100, 5, 1);
 		pos.scale(size);
 		target = projection.mul(pos, target);
 
@@ -99,11 +100,11 @@ public class Healthbar implements Drawable {
 		// TODO Auto-generated method stub
 		return "Healthbar";
 	}
-	
+
 	public void setHP(int hp) {
 		health = hp;
 	}
-	
+
 	public int getHP() {
 		return health;
 	}
@@ -122,5 +123,16 @@ public class Healthbar implements Drawable {
 		return false;
 	}
 
-	
+	public int takeDamage(int dmg) {
+		if (health > 0) {
+			health += -dmg * 5;
+			addPosition(new float[] { -dmg * 2 });
+		}
+		return health;
+	}
+
+	public void setLeftJustified(boolean leftJustified) {
+		this.leftJustified = leftJustified;
+	}
+
 }

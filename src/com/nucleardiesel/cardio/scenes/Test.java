@@ -3,6 +3,7 @@ package com.nucleardiesel.cardio.scenes;
 import static org.lwjgl.glfw.GLFW.*;
 
 import com.nucleardiesel.cardio.Main;
+import com.nucleardiesel.cardio.cards.Card;
 import com.nucleardiesel.cardio.entity.Fireball;
 import com.nucleardiesel.cardio.entity.Player;
 import com.nucleardiesel.cardio.gui.*;
@@ -26,7 +27,7 @@ public class Test extends Scene {
 		bg = new Background(window);
 		p1 = new Player(window);
 		bttn = new Button(window);
-		card = new Card(window);
+		
 		addDrawables(new Drawable[] { bg, p1, card});
 	}
 
@@ -87,7 +88,6 @@ public class Test extends Scene {
 			Fireball fireball = new Fireball(window, this, getContents().size());
 			fireball.setPosition(p1.getPosition()[0],p1.getPosition()[1]);
 			addDrawable(fireball);
-			card = new Card(window);
 			cooldown = card.getCooldown();
 			oncooldown = true;
 			setDrawable(card, 2);
