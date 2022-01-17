@@ -25,19 +25,19 @@ public class Deck {
 	}
 
 	private void generateDefaultDeck() {
+		deck.add(Cards.slash);
 		deck.add(Cards.fireball);
+		deck.add(Cards.slash);
 		deck.add(Cards.fireball);
-		deck.add(Cards.fireball);
-		deck.add(Cards.fireball);
-		deck.add(Cards.fireball);
+		deck.add(Cards.slash);
 	    deck.add(Cards.fireball);
+	    deck.add(Cards.slash);
 		deck.add(Cards.fireball);
+		deck.add(Cards.slash);
 		deck.add(Cards.fireball);
+		deck.add(Cards.slash);
 		deck.add(Cards.fireball);
-		deck.add(Cards.fireball);
-		deck.add(Cards.fireball);
-		deck.add(Cards.fireball);
-		deck.add(Cards.fireball);
+		deck.add(Cards.slash);
 		deck.add(Cards.fireball);
 		
 
@@ -79,7 +79,9 @@ public class Deck {
 			}
 			return cardplayed;
 		} catch (NullPointerException e) {
-			handIndex = new int[] { getNextCardIndex(), getNextCardIndex(), getNextCardIndex(), getNextCardIndex() };
+			Random rand = new Random();
+			
+			handIndex = new int[] {rand.nextInt(deck.size()) , rand.nextInt(deck.size()), rand.nextInt(deck.size()), rand.nextInt(deck.size()) };
 
 			for (int j = 0; j < handIndex.length; j++) {
 				hand[j] = null;

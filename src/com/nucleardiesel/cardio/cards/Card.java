@@ -64,7 +64,7 @@ public class Card implements Drawable, Hoverable {
 	
 		projection = new Matrix4f().setOrtho2D(-win.getWidth() / 2, win.getWidth() / 2, -win.getHeight() / 2,
 				win.getHeight() / 2);
-		setAnimation("Card", 0);
+		setAnimation("fireballCard", 0);
 		setFrame(0);
 		size = .05f;
 		played = false;
@@ -122,10 +122,10 @@ public class Card implements Drawable, Hoverable {
 	private void playcard() {
 		// TODO implement card playing
 		
-		played = true;
-		bc.playCard(this,0);
 		played = false;
-
+		if(bc.playCard(this,0)) {
+		played = true;
+		}
 	}
 
 	@Override

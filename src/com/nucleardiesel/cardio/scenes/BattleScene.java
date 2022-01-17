@@ -35,6 +35,7 @@ public class BattleScene extends Scene {
 	private Healthbar p2hp;
 	private SoundPlayer audioPlayer;
 	private BattleController battleController;
+	
 	@Override
 	public void init() {
 		battleController = new BattleController(this);
@@ -64,7 +65,10 @@ public class BattleScene extends Scene {
 
 	@Override
 	public void update() {
+		
 		battleController.update();
+		
+		
 		
 		
 		
@@ -79,7 +83,9 @@ public class BattleScene extends Scene {
 	}
 
 
-	
+	public Deck getDeck() {
+		return deck;
+	}
 	public Player getPlayer(int index) {
 		
 		switch(index){
@@ -115,13 +121,5 @@ public class BattleScene extends Scene {
 //		}
 //	}
 //
-//	int[] played = deck.updateHand();
-//
-//	for (int i = 0; i < played.length; i++) {
-//		if (played[i] > 0) {
-//
-//			setDrawable(deck.getHand()[i], i + 3);
-//		}
-//
-//	}
+
 }

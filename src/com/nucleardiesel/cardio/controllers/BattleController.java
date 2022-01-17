@@ -39,10 +39,23 @@ public class BattleController {
 			oncooldownp2 = false;
 			time2 = 0;
 		}
+		
+		
+		int[] played = battle.getDeck().updateHand();
+
+		for (int a = 0; a < played.length; a++) {
+			if (played[a] > 0) {
+
+				battle.setDrawable(battle.getDeck().getHand()[a], a + 3);
+			
+			}
+
+		}
 
 	}
 
 	public boolean playCard(Card card, int i) {
+		
 		
 		
 		if ((i == 0 && !oncooldownp1) || (i == 1 && !oncooldownp2)) {
@@ -75,8 +88,10 @@ public class BattleController {
 			// Spell
 
 			if (opponent.getHP() <= 0 && !opponent.getState().equals("Death")) {
+				opponent.setHP(0);
 				opponent.death();
 			}
+			
 			return true;
 		}
 
