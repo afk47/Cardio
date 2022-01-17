@@ -12,13 +12,13 @@ import com.nucleardiesel.cardio.texture.Texture;
 
 public class Player extends Entity {
 
-	private int health = 100;
+	private int health = 1000;
 
 	public Player(Window window) {
 		super(window);
 		doDefaultAnimation();
 		size = 2;
-		setPosition(-300, -300);
+		setPosition(-300, -250);
 	}
 
 	public void update() {

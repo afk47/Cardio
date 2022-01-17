@@ -5,36 +5,40 @@ import java.util.Random;
 
 import com.nucleardiesel.cardio.gui.Drawable;
 import com.nucleardiesel.cardio.gui.Window;
+import com.nucleardiesel.cardio.scenes.BattleScene;
 
 public class Deck {
 
-	ArrayList<String> deck = new ArrayList<String>();
+	ArrayList<Cards> deck = new ArrayList<Cards>();
 	Card[] hand = new Card[4];
 	int[] handIndex = new int[4];
 
 	private Window window;
-
-	public Deck(Window win) {
+	private BattleScene scene;
+	
+	
+	public Deck(Window win, BattleScene scene) {
 		window = win;
+		this.scene = scene;
 		generateDefaultDeck();
 		updateHand();
 	}
 
 	private void generateDefaultDeck() {
-		deck.add("Fireball");
-		deck.add("Fireball");
-		deck.add("Fireball");
-		deck.add("Fireball");
-		deck.add("Fireball");
-		deck.add("Fireball");
-		deck.add("Fireball");
-		deck.add("Fireball");
-		deck.add("Fireball");
-		deck.add("Fireball");
-		deck.add("Fireball");
-		deck.add("Fireball");
-		deck.add("Fireball");
-		deck.add("Fireball");
+		deck.add(Cards.fireball);
+		deck.add(Cards.fireball);
+		deck.add(Cards.fireball);
+		deck.add(Cards.fireball);
+		deck.add(Cards.fireball);
+	    deck.add(Cards.fireball);
+		deck.add(Cards.fireball);
+		deck.add(Cards.fireball);
+		deck.add(Cards.fireball);
+		deck.add(Cards.fireball);
+		deck.add(Cards.fireball);
+		deck.add(Cards.fireball);
+		deck.add(Cards.fireball);
+		deck.add(Cards.fireball);
 		
 
 	}
@@ -66,7 +70,8 @@ public class Deck {
 			for (Card c : hand) {
 				if (c.beenPlayed()) {
 					handIndex[i] = getNextCardIndex();
-					hand[i] = new Card(window,deck.get(handIndex[i]));
+					hand[i] = null;
+					hand[i] = new Card(window,deck.get(handIndex[i]),scene);
 					hand[i].setPosition(-800 + 200 * i, -500);
 					cardplayed[i] = 1;
 				}
@@ -77,8 +82,8 @@ public class Deck {
 			handIndex = new int[] { getNextCardIndex(), getNextCardIndex(), getNextCardIndex(), getNextCardIndex() };
 
 			for (int j = 0; j < handIndex.length; j++) {
-				hand[j] = new Card(window,deck.get(handIndex[j]));
-				hand[j].reset();
+				hand[j] = null;
+				hand[j] = new Card(window,deck.get(handIndex[j]),scene);
 				hand[j].setPosition(-800 + 200 * j, -500);
 			}
 

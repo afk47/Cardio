@@ -11,10 +11,13 @@ import java.nio.IntBuffer;
 import org.lwjgl.opengl.*;
 
 import com.nucleardiesel.cardio.Main;
+import com.nucleardiesel.cardio.controllers.BattleController;
 import com.nucleardiesel.cardio.controllers.Input;
 import com.nucleardiesel.cardio.gui.Drawable;
 import com.nucleardiesel.cardio.gui.Hoverable;
+import com.nucleardiesel.cardio.gui.Scene;
 import com.nucleardiesel.cardio.gui.Window;
+import com.nucleardiesel.cardio.scenes.BattleScene;
 import com.nucleardiesel.cardio.texture.AnimationLoader;
 import com.nucleardiesel.cardio.texture.Model;
 import com.nucleardiesel.cardio.texture.Texture;
@@ -41,23 +44,36 @@ public class Card implements Drawable, Hoverable {
 	protected boolean animationCompleted = false;
 	protected String currentAnimation = "Card";
 	private AnimationLoader animLoader = new AnimationLoader();
-
+	private BattleScene scene;
 	private boolean hovering = false;
 	private boolean played = false;
-	private float cooldown = 1f;
-
-	private int damage = 5;
-
-
-	public Card(Window window, String string) {
+	private float cooldown = 5f;
+	private BattleController bc;
+	private int damage = 50;
+	private type type;
+	
+	
+	
+	public Card(Window window, Cards cardname, BattleScene s) {
+		
+		scene = s;
+		bc = scene.getBattleController();
+		
 		win = window;
 		input = win.getInput();
+	
 		projection = new Matrix4f().setOrtho2D(-win.getWidth() / 2, win.getWidth() / 2, -win.getHeight() / 2,
 				win.getHeight() / 2);
 		setAnimation("Card", 0);
 		setFrame(0);
 		size = .05f;
 		played = false;
+		
+		
+		type = type.Attack;
+		
+		CardLoader.loadCard(cardname, this);
+		
 	}
 
 	@Override
@@ -94,11 +110,10 @@ public class Card implements Drawable, Hoverable {
 		}
 
 		if (input.isMouseButtonReleased(0)) {
-			System.out.println("CLICKED");
 
 			hovering = false;
 			hoverEnd();
-			Main.getController().getCurrentScene();
+
 			playcard();
 		}
 
@@ -106,8 +121,11 @@ public class Card implements Drawable, Hoverable {
 
 	private void playcard() {
 		// TODO implement card playing
+		
 		played = true;
-		position[1] = -9999; // Removes Card From Screen Must Implement
+		bc.playCard(this,0);
+		played = false;
+
 	}
 
 	@Override
@@ -224,7 +242,28 @@ public class Card implements Drawable, Hoverable {
 
 	public void reset() {
 		played = false;
+
+	}
+
+	public void setCooldown(float i) {
+		cooldown = i;
 		
 	}
 
+	public void setDamage(int i) {
+		damage = i;
+	}
+
+	public void setType(type t) {		
+		type = t;
+	}
+
+	public type getType() {
+		return type;
+	}
+	
+	public enum type{
+		
+		Attack, Block, Spell;
+	}
 }

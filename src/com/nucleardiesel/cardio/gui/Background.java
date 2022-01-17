@@ -23,7 +23,7 @@ public class Background implements Drawable{
 		projection = new Matrix4f().setOrtho2D(-window.getWidth() / 2, window.getWidth() / 2, -window.getHeight() / 2,
 				window.getHeight() / 2);
 		size = 1.2f;
-		position = new float[]{0, 400, 0};
+		position = new float[]{0, 700, 0};
 		// TODO Auto-generated constructor stub
 	}
 
@@ -36,7 +36,7 @@ public class Background implements Drawable{
 	@Override
 	public Matrix4f translate() {
 		target = new Matrix4f();
-		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(model.getWidth() , model.getHeight(), 1);
+		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(model.getWidth() , model.getHeight()*1.3f, 1);
 		pos.scale(size);
 		target = projection.mul(pos, target);
 		

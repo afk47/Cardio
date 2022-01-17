@@ -9,6 +9,7 @@ import java.nio.IntBuffer;
 import javax.swing.text.Position;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL11;
@@ -16,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.nucleardiesel.cardio.controllers.Input;
+import com.nucleardiesel.cardio.texture.TextureLoader;
 
 import org.lwjgl.system.*;
 
@@ -43,7 +45,7 @@ public class Window {
 
 	}
 
-	/*
+	/**
 	 * Creates a window
 	 *
 	 * @PARAM title : title of window
@@ -75,6 +77,8 @@ public class Window {
 			glfwGetWindowSize(window, widthp, heightp);
 			GLFWVidMode vid = glfwGetVideoMode(glfwGetPrimaryMonitor());
 			glfwSetWindowPos(window, (vid.width() - widthp.get(0)) / 2, (vid.height() - heightp.get(0)) / 2);
+			
+			
 		}
 
 		glfwMakeContextCurrent(window);

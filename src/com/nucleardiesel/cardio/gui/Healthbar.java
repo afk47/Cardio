@@ -5,6 +5,7 @@ import javax.swing.text.Position;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
+import com.nucleardiesel.cardio.entity.Player;
 import com.nucleardiesel.cardio.texture.Model;
 import com.nucleardiesel.cardio.texture.Texture;
 import com.nucleardiesel.cardio.texture.TexturedModel;
@@ -22,13 +23,16 @@ public class Healthbar implements Drawable {
 	private int health = 1000;
 	private int maxHP = 1000;
 	private boolean leftJustified = true;
+	private Player player;
 	
-	public Healthbar(Window window) {
+	public Healthbar(Window window, Player plyr) {
 		win = window;
 		projection = new Matrix4f().setOrtho2D(-window.getWidth() / 2, window.getWidth() / 2, -window.getHeight() / 2,
 				window.getHeight() / 2);
 		size = 4f;
 		position = new float[] { -600, 500, 0 };
+		player = plyr;
+		
 		// TODO Auto-generated constructor stub
 	}
 
@@ -92,7 +96,7 @@ public class Healthbar implements Drawable {
 
 	@Override
 	public void update() {
-
+		health = player.getHP();
 	}
 
 	@Override
@@ -126,7 +130,10 @@ public class Healthbar implements Drawable {
 	public int takeDamage(int dmg) {
 		if (health > 0) {
 			health += -dmg * 5;
-			addPosition(new float[] { -dmg * 2 });
+			if(leftJustified) {
+				dmg *= -1;
+			}
+			addPosition(new float[] { dmg * 2 });
 		}
 		return health;
 	}
