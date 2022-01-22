@@ -1,15 +1,18 @@
 # Cardio
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquam diam sit amet augue feugiat iaculis. Nam tempor nibh tellus, eget facilisis sapien pellentesque quis. Aliquam cursus at urna in viverra. Sed sed quam luctus, eleifend elit id, varius ipsum. Vestibulum dapibus eros arcu, ut auctor orci dignissim ut. Etiam eget erat consectetur, porttitor libero et, ornare risus. In cursus risus sit amet placerat vehicula. Integer ut est eu purus interdum sagittis nec sit amet justo.
+A Java game written in openGL 
+
+Fighting Card game with no turns instead cards have a cooldown in which the player cannot use another card
+Currently in development (pre alpha)
 
 
 # Requirements
 
-java
+Java 
 
 # Development Setup 
 
-java
+Java
 
 # Contributing
 
