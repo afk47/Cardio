@@ -7,6 +7,7 @@ import com.nucleardiesel.cardio.gui.Drawable;
 import com.nucleardiesel.cardio.gui.Window;
 import com.nucleardiesel.cardio.scenes.BattleScene;
 
+
 public class Deck {
 
 	ArrayList<Cards> deck = new ArrayList<Cards>();
@@ -25,20 +26,18 @@ public class Deck {
 	}
 
 	private void generateDefaultDeck() {
-		deck.add(Cards.slash);
-		deck.add(Cards.fireball);
-		deck.add(Cards.slash);
-		deck.add(Cards.fireball);
-		deck.add(Cards.slash);
-	    deck.add(Cards.fireball);
-	    deck.add(Cards.slash);
-		deck.add(Cards.fireball);
-		deck.add(Cards.slash);
-		deck.add(Cards.fireball);
-		deck.add(Cards.slash);
-		deck.add(Cards.fireball);
-		deck.add(Cards.slash);
-		deck.add(Cards.fireball);
+		deck.add(Attack.slash);
+		deck.add(Spells.fireball);
+		deck.add(Attack.slash);
+		deck.add(Spells.fireball);
+		deck.add(Attack.slash);
+		deck.add(Spells.fireball);
+		deck.add(Attack.slash);
+		deck.add(Spells.fireball);
+		deck.add(Attack.slash);
+		deck.add(Spells.fireball);
+		deck.add(Attack.slash);
+		deck.add(Spells.fireball);
 		
 
 	}

@@ -17,19 +17,25 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class AnimationLoader {
 
+	
 	private static final Logger logger = LoggerFactory.getLogger(AnimationLoader.class);
 	private int h = -1;
 	private int w = -1;
 	private float[] texture_coords;
-	private String animation = "Attack1";// Attack is currently a placeholder
+	private String animation = "attack1";// Attack is currently a placeholder
 	private int frames = 0;
-	private int currentFrame = 0;
+	private int currentFrame = 1;
 
 	float fx =0;
 	float fy =0;
 	float fh =0;
 	float fw =0;
 
+	/*
+	 * TODO REWERITE SO THE TEXTURE COORDS ARE AN ARRAY WITH ALL TEX COORDS
+	 * 
+	 * 
+	 */
 	public void loadAnimation(String s) {
 		animation = s;
 		try {
@@ -75,9 +81,9 @@ public class AnimationLoader {
 			if (node.has("frames")) {
 				String jsonString = "" + node.get("frames");
 				node = new ObjectMapper().readValue(jsonString, ObjectNode.class);
-				if (node.has(animation + "-" + i + ".png")) {
+				if (node.has(animation + "_" + i + ".png")) {
 					frames = node.size();
-					jsonString = "" + node.get(animation + "-" + i + ".png");
+					jsonString = "" + node.get(animation + "_" + i + ".png");
 					node = new ObjectMapper().readValue(jsonString, ObjectNode.class);
 					if (node.has("frame")) {
 						jsonString = "" + node.get("frame");

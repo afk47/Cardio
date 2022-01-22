@@ -4,34 +4,44 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 import com.nucleardiesel.cardio.Main;
+import com.nucleardiesel.cardio.cards.Cards;
+import com.nucleardiesel.cardio.cards.Spells;
 import com.nucleardiesel.cardio.gui.Drawable;
 import com.nucleardiesel.cardio.gui.Window;
+import com.nucleardiesel.cardio.scenes.BattleScene;
 import com.nucleardiesel.cardio.texture.AnimationLoader;
 import com.nucleardiesel.cardio.texture.Model;
 import com.nucleardiesel.cardio.texture.Texture;
 
 public class Player extends Entity {
 
+	private boolean blocking = false;
 	private int health = 1000;
-
-	public Player(Window window) {
+	private BattleScene scene;
+	public enum status{
+		poisoned, bleeding, invulnerable, stunned;
+	}
+	
+	
+	public Player(Window window,BattleScene s) {
 		super(window);
+		scene = s;
 		doDefaultAnimation();
-		size = 2;
+		size = 10;
 		setPosition(-300, -250);
 	}
 
 	public void update() {
 		super.update();
-		if (!currentAnimation.equals("Death")) {
+		if (!currentAnimation.equals("death")) {
 
-			if (currentAnimation.equals("Jump") && animationCompleted) {
-				fall();
+			if (currentAnimation.equals("jump") && animationCompleted) {
+				idle();
 			}
-			if (currentAnimation.equals("Jump")) {
+			if (currentAnimation.equals("jump")) {
 				addPosition(new float[] { 0f, 20f, 0f });
 			}
-			if (!currentAnimation.equals("Idle") && animationCompleted) {
+			if (!currentAnimation.equals("idle") && animationCompleted) {
 				idle();
 			}
 			if (currentframe != lastFrame) {
@@ -45,29 +55,26 @@ public class Player extends Entity {
 		
 	}
 
-	public void fall() {
-		setAnimation("Fall", .1f);
-
-	}
+	
 
 	public void attack() {
-		setAnimation("Attack1", 0.5f);
+		setAnimation("Characters/sword1/attack1", 0.5f);
 	}
 
 	public void idle() {
-		setAnimation("Idle", 1);
+		setAnimation("Characters/sword1/idle", 1);
 
 	}
 
 	public void run() {
-		if (currentAnimation != "Attack1" && currentAnimation != "Run" || !(currentframe < frames - 1))
-			setAnimation("Run", .5f);
+		if (currentAnimation != "attack1" && currentAnimation != "run" || !(currentframe < frames - 1))
+			setAnimation("Characters/sword1/run", .5f);
 
 	}
 
 	@Override
 	protected void doDefaultAnimation() {
-		setAnimation("Idle", 1);
+		setAnimation("Characters/sword1/idle", 1);
 
 	}
 
@@ -86,7 +93,7 @@ public class Player extends Entity {
 	}
 
 	public void jump() {
-		setAnimation("Jump", .1f);
+		setAnimation("Characters/sword1/jump", .1f);
 
 	}
 
@@ -107,8 +114,28 @@ public class Player extends Entity {
 	}
 
 	public void death() {
-		setAnimation("Death", .5f);
-		currentAnimation = "Death";
+		setAnimation("Characters/sword1/death", .5f);
+		currentAnimation = "death";
 	}
+	
+	public void block() {
+		blocking = true;
+	}
+	
+	public void stopBlocking() {
+		blocking = false;
+	}
+
+	public boolean isBlocking() {
+		
+		return blocking;
+	}
+
+	public void playFX(Spells s) {
+	
+		scene.playFX(s);	
+	}
+
+	
 
 }

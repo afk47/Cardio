@@ -4,7 +4,7 @@ import org.joml.Matrix4f;
 
 public class TexturedModel {
 
-	private Texture texture = new Texture("/Sprites/Fall.png");
+	private Texture texture = new Texture("/Sprites/Characters/sword1/idle.png");
 	private Model model = new Model();
 
 	public TexturedModel(String string) {

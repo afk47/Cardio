@@ -50,12 +50,17 @@ public class Card implements Drawable, Hoverable {
 	private float cooldown = 5f;
 	private BattleController bc;
 	private int damage = 50;
-	private type type;
-	
-	
+	private type type; // Type of Card (spell/Attack/block)
+	private Cards name; // Name of Card (for outside access to determine what fx to draw)
+		
 	
 	public Card(Window window, Cards cardname, BattleScene s) {
-		
+		init(window, s);
+		name = cardname;
+		CardLoader.loadCard(cardname, this);
+	}
+
+	private void init(Window window, BattleScene s) {
 		scene = s;
 		bc = scene.getBattleController();
 		
@@ -69,13 +74,9 @@ public class Card implements Drawable, Hoverable {
 		size = .05f;
 		played = false;
 		
-		
-		type = type.Attack;
-		
-		CardLoader.loadCard(cardname, this);
-		
 	}
-
+	
+	
 	@Override
 	public void update() {
 		Vector3f mouse = input.getMousePosition();
@@ -262,8 +263,14 @@ public class Card implements Drawable, Hoverable {
 		return type;
 	}
 	
+	public Cards getName() {
+		return name;
+	}
+	
 	public enum type{
 		
 		Attack, Block, Spell;
 	}
+	
+	
 }

@@ -25,7 +25,6 @@ public class Test extends Scene {
 	@Override
 	public void init() {
 		bg = new Background(window);
-		p1 = new Player(window);
 		bttn = new Button(window);
 		
 		addDrawables(new Drawable[] { bg, p1, card});

@@ -1,7 +1,31 @@
 package com.nucleardiesel.cardio.cards;
 
-public enum Cards {
+import com.nucleardiesel.cardio.entity.Player;
 
-	fireball,slash;
+/*
+ * Defines all available cards and values
+ * 
+ * 
+ */
 
+public interface Cards {
+
+	public String toString();
+
+	public String file();
+
+	public int damage();
+
+	public Card.type getType();
+
+	public float cooldown();
+	
+	
+	
 }
+
+
+
+
+
+

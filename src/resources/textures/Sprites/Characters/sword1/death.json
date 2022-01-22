@@ -1,0 +1,31 @@
+{"frames": {
+	"death_1.png":{
+		"rotated": false,"trimmed": true,
+		"frame": {"x":24,"y":28,"w":19,"h":29},
+		"spriteSourceSize": {"x":14,"y":13,"w":50,"h":48},
+		"sourceSize": {"w":50,"h":48}
+	},
+	"death_2.png":{
+		"rotated": false,"trimmed": true,
+		"frame": {"x":0,"y":28,"w":22,"h":26},
+		"spriteSourceSize": {"x":9,"y":17,"w":50,"h":48},
+		"sourceSize": {"w":50,"h":48}
+	},
+	"death_3.png":{
+		"rotated": false,"trimmed": true,
+		"frame": {"x":0,"y":7,"w":32,"h":19},
+		"spriteSourceSize": {"x":6,"y":23,"w":50,"h":48},
+		"sourceSize": {"w":50,"h":48}
+	},
+	"death_4.png":{
+		"rotated": false,"trimmed": true,
+		"frame": {"x":0,"y":0,"w":42,"h":5},
+		"spriteSourceSize": {"x":1,"y":37,"w":50,"h":48},
+		"sourceSize": {"w":50,"h":48}
+	}
+},
+"meta": {
+	"app": "ShoeBox",
+	"size": {"w":64,"h":64}
+}
+}

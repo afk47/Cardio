@@ -23,15 +23,14 @@ public abstract class Scene {
 	public void updateScene() {
 		update();
 		int removeIndex = -1;
-		int i = 0;
-		for (Drawable d : drawables) {
+		for (int i = 0; i < drawables.size(); i++) {
+			Drawable d = drawables.get(i);
 			d.update();
 			if (d.shouldDestroy()) {
 				removeIndex = i;
 				d = null;
 
 			}
-			i++;
 		}
 		if (removeIndex > -1) {
 			drawables.remove(removeIndex);

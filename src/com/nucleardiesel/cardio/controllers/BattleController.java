@@ -2,6 +2,7 @@ package com.nucleardiesel.cardio.controllers;
 
 import com.nucleardiesel.cardio.Main;
 import com.nucleardiesel.cardio.cards.Card;
+import com.nucleardiesel.cardio.cards.Spells;
 import com.nucleardiesel.cardio.entity.Player;
 import com.nucleardiesel.cardio.scenes.BattleScene;
 
@@ -76,13 +77,28 @@ public class BattleController {
 			}
 
 			// Card Block/spell/attack Logic HERE
-			// switch(cardType)
+			switch(card.getType()) {
+			case Attack:
+				player.attack();
+				if (!(opponent.getHP() <= 0) && !opponent.isBlocking()) {
+					opponent.takeDamage(card.getDamage());
+				}
+				if(opponent.isBlocking()) {
+					opponent.takeDamage(card.getDamage() / 10);
+				}
+				
+				break;
+			case Block:
+				player.block();
+				break;
+			case Spell:
+				Spells.cast((Spells) card.getName(),player, opponent);
+				break;
+			
+			}
 
 			// Attack
-			player.attack();
-			if (!(opponent.getHP() <= 0)) {
-				opponent.takeDamage(card.getDamage());
-			}
+			
 			// Block
 
 			// Spell

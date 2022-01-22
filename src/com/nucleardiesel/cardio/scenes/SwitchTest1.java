@@ -17,7 +17,6 @@ public class SwitchTest1 extends Scene {
 
     @Override
     public void init() {
-        p1 = new Player(window);
 
         addDrawables(new Drawable[]{p1});
     }
