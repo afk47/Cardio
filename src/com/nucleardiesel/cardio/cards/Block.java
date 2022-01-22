@@ -1,7 +1,15 @@
 package com.nucleardiesel.cardio.cards;
 
 import com.nucleardiesel.cardio.cards.Card.type;
-
+/**
+ * 
+ * Block type cards
+ * @param name 
+ * @param damage 
+ * @param file 
+ * @param cooldown
+ * @param type 
+ */
 public enum Block implements Cards {
 	lightBlock("lightBlock",0,.5f,"Card");
 	

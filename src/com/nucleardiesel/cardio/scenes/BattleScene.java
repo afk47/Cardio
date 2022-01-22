@@ -49,7 +49,7 @@ public class BattleScene extends Scene {
 
 		// sets pos of healthbars
 		p1hp.addPosition(new float[] { 100, 0, 0 });
-		p2.addPosition(new float[] { 400, 0, 0 });
+		p2.addPosition(new float[] { 600, 0, 0 });
 		p2.flipHorizontal();
 		p2hp.addPosition(new float[] { 1100, 0, 0 });
 		addDrawables(new Drawable[] { bg, p1, p2, deck.getHand()[0], deck.getHand()[1], deck.getHand()[2],
@@ -105,7 +105,7 @@ public class BattleScene extends Scene {
 
 		case fireball:
 			Fireball fireball = new Fireball(window, this, getContents().size());
-			fireball.setPosition(p1.getPosition()[0], p1.getPosition()[1]);
+			fireball.setPosition(p1.getOrigin()[0], p1.getOrigin()[1]);
 			addDrawable(fireball);
 			break;
 		}

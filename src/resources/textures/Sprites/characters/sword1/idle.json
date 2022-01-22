@@ -1,19 +1,19 @@
 {"frames": {
 	"idle-0.png":{
 		"rotated": false,"trimmed": true,
-		"frame": {"x":17,"y":0,"w":15,"h":30},
-		"spriteSourceSize": {"x":17,"y":12,"w":50,"h":48},
+		"frame": {"x":0,"y":50,"w":50,"h":48},
+		"spriteSourceSize": {"x":0,"y":0,"w":50,"h":48},
 		"sourceSize": {"w":50,"h":48}
 	},
 	"idle-1.png":{
 		"rotated": false,"trimmed": true,
-		"frame": {"x":0,"y":0,"w":15,"h":31},
-		"spriteSourceSize": {"x":17,"y":11,"w":50,"h":48},
+		"frame": {"x":0,"y":0,"w":50,"h":48},
+		"spriteSourceSize": {"x":0,"y":0,"w":50,"h":48},
 		"sourceSize": {"w":50,"h":48}
 	}
 },
 "meta": {
 	"app": "ShoeBox",
-	"size": {"w":64,"h":64}
+	"size": {"w":52,"h":100}
 }
 }
