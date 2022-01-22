@@ -3,13 +3,18 @@ package com.nucleardiesel.cardio.cards;
 import com.nucleardiesel.cardio.cards.Card.type;
 import com.nucleardiesel.cardio.entity.Player;
 
-/*
- * Enum containing all Spell Cards
+/**
  * 
+ * Spell type cards
+ * @param name 
+ * @param damage 
+ * @param file 
+ * @param cooldown
+ * @param type 
  */
 public enum Spells implements Cards {
 
-	fireball("fireball",75,1f,"fireballCard");
+	fireball("fireball",750,1f,"fireballCard");
 	
 	// Implementation For casting spells
 	

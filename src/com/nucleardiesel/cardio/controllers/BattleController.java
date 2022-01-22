@@ -24,6 +24,10 @@ public class BattleController {
 
 	}
 
+	/**
+	 * Battle Logic 
+	 * 
+	 */
 	public void update() {
 
 		time += Main.getPassed();
@@ -55,10 +59,18 @@ public class BattleController {
 
 	}
 
+	
+	
+	/**
+	 * Logic for playing cards 
+	 * applys damage, checks cooldowns etc.
+	 * 
+	 * @param card card that is being played
+	 * @param i which player played the card
+	 * @return whether the card was played
+	 */
 	public boolean playCard(Card card, int i) {
-		
-		
-		
+	
 		if ((i == 0 && !oncooldownp1) || (i == 1 && !oncooldownp2)) {
 			card.reset();
 
@@ -76,7 +88,7 @@ public class BattleController {
 				opponent = battle.getPlayer(0);
 			}
 
-			// Card Block/spell/attack Logic HERE
+			
 			switch(card.getType()) {
 			case Attack:
 				player.attack();
@@ -92,17 +104,12 @@ public class BattleController {
 				player.block();
 				break;
 			case Spell:
+				if (!(opponent.getHP() <= 0)) {
 				Spells.cast((Spells) card.getName(),player, opponent);
+				}
 				break;
 			
 			}
-
-			// Attack
-			
-			// Block
-
-			// Spell
-
 			if (opponent.getHP() <= 0 && !opponent.getState().equals("Death")) {
 				opponent.setHP(0);
 				opponent.death();

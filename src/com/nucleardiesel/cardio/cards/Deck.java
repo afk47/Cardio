@@ -17,7 +17,11 @@ public class Deck {
 	private Window window;
 	private BattleScene scene;
 	
-	
+	/**
+	 * 
+	 * @param win used to create card objects
+	 * @param scene used to create card objects
+	 */
 	public Deck(Window win, BattleScene scene) {
 		window = win;
 		this.scene = scene;
@@ -43,7 +47,7 @@ public class Deck {
 	}
 
 	public Deck(String file) {
-		// Read deck from file
+		// TODO Read deck from file
 	}
 
 	/**
@@ -62,6 +66,10 @@ public class Deck {
 	    return card;
 	}
 
+	/**
+	 * updates the cards in Hand
+	 * @return cards played
+	 */
 	public int[] updateHand() {
 		int i = 0;
 		int[] cardplayed = new int[] {0,0,0,0};
@@ -92,6 +100,10 @@ public class Deck {
 		return cardplayed;
 	}
 
+	/**
+	 * 
+	 * @return cards in hand currently
+	 */
 	public Card[] getHand() {
 
 		return hand;

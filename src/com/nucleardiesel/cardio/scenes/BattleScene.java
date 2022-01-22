@@ -13,7 +13,6 @@ import com.nucleardiesel.cardio.entity.Player;
 import com.nucleardiesel.cardio.entity.SlashEffect;
 import com.nucleardiesel.cardio.gui.Background;
 import com.nucleardiesel.cardio.gui.Button;
-import com.nucleardiesel.cardio.gui.CooldownIndicator;
 import com.nucleardiesel.cardio.gui.Drawable;
 import com.nucleardiesel.cardio.gui.Healthbar;
 import com.nucleardiesel.cardio.gui.Scene;
@@ -50,7 +49,7 @@ public class BattleScene extends Scene {
 
 		// sets pos of healthbars
 		p1hp.addPosition(new float[] { 100, 0, 0 });
-		p2.addPosition(new float[] { 400, 0, 0 });
+		p2.addPosition(new float[] { 600, 0, 0 });
 		p2.flipHorizontal();
 		p2hp.addPosition(new float[] { 1100, 0, 0 });
 		addDrawables(new Drawable[] { bg, p1, p2, deck.getHand()[0], deck.getHand()[1], deck.getHand()[2],
@@ -58,7 +57,7 @@ public class BattleScene extends Scene {
 
 		// CREATES Audio Player Then Plays Sound at file location
 		audioPlayer = new SoundPlayer();
-		audioPlayer.addSound("src/resources/textures/Music/Decisive Battle/xDeviruchi - Decisive Battle (Loop).ogg",
+		audioPlayer.addSound("src/resources/sounds/Music/Decisive Battle/xDeviruchi - Decisive Battle (Loop).ogg",
 				true);
 		audioPlayer.play(0);
 		p2hp.setLeftJustified(false);
@@ -106,7 +105,7 @@ public class BattleScene extends Scene {
 
 		case fireball:
 			Fireball fireball = new Fireball(window, this, getContents().size());
-			fireball.setPosition(p1.getPosition()[0], p1.getPosition()[1]);
+			fireball.setPosition(p1.getOrigin()[0], p1.getOrigin()[1]);
 			addDrawable(fireball);
 			break;
 		}

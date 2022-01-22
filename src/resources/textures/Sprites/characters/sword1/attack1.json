@@ -1,0 +1,43 @@
+{"frames": {
+	"attack1-0.png":{
+		"rotated": false,"trimmed": true,
+		"frame": {"x":102,"y":0,"w":100,"h":65},
+		"spriteSourceSize": {"x":0,"y":0,"w":100,"h":65},
+		"sourceSize": {"w":100,"h":65}
+	},
+	"attack1-1.png":{
+		"rotated": false,"trimmed": true,
+		"frame": {"x":102,"y":134,"w":100,"h":65},
+		"spriteSourceSize": {"x":0,"y":0,"w":100,"h":65},
+		"sourceSize": {"w":100,"h":65}
+	},
+	"attack1-2.png":{
+		"rotated": false,"trimmed": true,
+		"frame": {"x":0,"y":67,"w":100,"h":65},
+		"spriteSourceSize": {"x":0,"y":0,"w":100,"h":65},
+		"sourceSize": {"w":100,"h":65}
+	},
+	"attack1-3.png":{
+		"rotated": false,"trimmed": true,
+		"frame": {"x":0,"y":0,"w":100,"h":65},
+		"spriteSourceSize": {"x":0,"y":0,"w":100,"h":65},
+		"sourceSize": {"w":100,"h":65}
+	},
+	"attack1-4.png":{
+		"rotated": false,"trimmed": true,
+		"frame": {"x":0,"y":134,"w":100,"h":65},
+		"spriteSourceSize": {"x":0,"y":0,"w":100,"h":65},
+		"sourceSize": {"w":100,"h":65}
+	},
+	"attack1-5.png":{
+		"rotated": false,"trimmed": true,
+		"frame": {"x":102,"y":67,"w":100,"h":65},
+		"spriteSourceSize": {"x":0,"y":0,"w":100,"h":65},
+		"sourceSize": {"w":100,"h":65}
+	}
+},
+"meta": {
+	"app": "ShoeBox",
+	"size": {"w":204,"h":201}
+}
+}

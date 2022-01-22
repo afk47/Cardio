@@ -1,0 +1,19 @@
+{"frames": {
+	"idle-0.png":{
+		"rotated": false,"trimmed": true,
+		"frame": {"x":0,"y":50,"w":50,"h":48},
+		"spriteSourceSize": {"x":0,"y":0,"w":50,"h":48},
+		"sourceSize": {"w":50,"h":48}
+	},
+	"idle-1.png":{
+		"rotated": false,"trimmed": true,
+		"frame": {"x":0,"y":0,"w":50,"h":48},
+		"spriteSourceSize": {"x":0,"y":0,"w":50,"h":48},
+		"sourceSize": {"w":50,"h":48}
+	}
+},
+"meta": {
+	"app": "ShoeBox",
+	"size": {"w":52,"h":100}
+}
+}

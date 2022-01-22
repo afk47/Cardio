@@ -2,6 +2,15 @@ package com.nucleardiesel.cardio.cards;
 
 import com.nucleardiesel.cardio.cards.Card.type;
 
+/**
+ * 
+ * Attack type cards
+ * @param name 
+ * @param damage 
+ * @param file 
+ * @param cooldown
+ * @param type 
+ */
 public enum Attack implements Cards {
 	slash("slash",50,1f,"Card");
 

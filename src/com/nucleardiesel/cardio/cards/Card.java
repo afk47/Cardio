@@ -22,7 +22,11 @@ import com.nucleardiesel.cardio.texture.AnimationLoader;
 import com.nucleardiesel.cardio.texture.Model;
 import com.nucleardiesel.cardio.texture.Texture;
 import com.nucleardiesel.cardio.texture.TexturedModel;
-
+/**
+ * 
+ * @author Andrew
+ *
+ */
 public class Card implements Drawable, Hoverable {
 
 	private Window win;
@@ -50,33 +54,50 @@ public class Card implements Drawable, Hoverable {
 	private float cooldown = 5f;
 	private BattleController bc;
 	private int damage = 50;
-	private type type; // Type of Card (spell/Attack/block)
+	private type type; 
 	private Cards name; // Name of Card (for outside access to determine what fx to draw)
-		
 	
+	/**
+	 * Different Types of cards currently only Attack, Block, or Spell
+	 *
+	 */
+	public enum type {
+
+		Attack, Block, Spell;
+	}
+
+	/**
+	 * @param window   used to get height/width
+	 * @param cardname used to load card
+	 * @param s        used to play card without a loop
+	 * 
+	 */
 	public Card(Window window, Cards cardname, BattleScene s) {
 		init(window, s);
 		name = cardname;
 		CardLoader.loadCard(cardname, this);
 	}
 
+	/**
+	 * initializes card
+	 * 
+	 */
 	private void init(Window window, BattleScene s) {
 		scene = s;
 		bc = scene.getBattleController();
-		
+
 		win = window;
 		input = win.getInput();
-	
+
 		projection = new Matrix4f().setOrtho2D(-win.getWidth() / 2, win.getWidth() / 2, -win.getHeight() / 2,
 				win.getHeight() / 2);
 		setAnimation("fireballCard", 0);
 		setFrame(0);
 		size = .05f;
 		played = false;
-		
+
 	}
-	
-	
+
 	@Override
 	public void update() {
 		Vector3f mouse = input.getMousePosition();
@@ -120,12 +141,15 @@ public class Card implements Drawable, Hoverable {
 
 	}
 
+	/**
+	 * calls method playcard in battleController class
+	 * 
+	 */
 	private void playcard() {
-		// TODO implement card playing
-		
+
 		played = false;
-		if(bc.playCard(this,0)) {
-		played = true;
+		if (bc.playCard(this, 0)) {
+			played = true;
 		}
 	}
 
@@ -134,6 +158,10 @@ public class Card implements Drawable, Hoverable {
 		model.bind(sampler);
 	}
 
+	/**
+	 * moves card to position
+	 * 
+	 */
 	public Matrix4f translate() {
 		target = new Matrix4f();
 		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(model.getWidth(), model.getHeight(), 1);
@@ -143,6 +171,10 @@ public class Card implements Drawable, Hoverable {
 		return target;
 	}
 
+	/**
+	 * mirrors card
+	 * 
+	 */
 	public void flipHorizontal() {
 		target = new Matrix4f();
 		pos = new Matrix4f().setTranslation(new Vector3f(position)).scale(size);
@@ -151,6 +183,7 @@ public class Card implements Drawable, Hoverable {
 		flippedHorizontal = true;
 	}
 
+	
 	@Override
 	public void setAnimation(String file, float length) {
 		model.remove();
@@ -164,6 +197,7 @@ public class Card implements Drawable, Hoverable {
 		animationCompleted = false;
 	}
 
+	
 	@Override
 	public void setFrame(int f) {
 		animLoader.loadFrame(f);
@@ -177,6 +211,7 @@ public class Card implements Drawable, Hoverable {
 		position[1] = y;
 	}
 
+	
 	@Override
 	public void setTotalFrames(float f) {
 		frames = f;
@@ -235,6 +270,7 @@ public class Card implements Drawable, Hoverable {
 		return damage;
 	}
 
+	
 	@Override
 	public boolean shouldDestroy() {
 		// TODO Auto-generated method stub
@@ -248,29 +284,23 @@ public class Card implements Drawable, Hoverable {
 
 	public void setCooldown(float i) {
 		cooldown = i;
-		
+
 	}
 
 	public void setDamage(int i) {
 		damage = i;
 	}
 
-	public void setType(type t) {		
+	public void setType(type t) {
 		type = t;
 	}
 
 	public type getType() {
 		return type;
 	}
-	
+
 	public Cards getName() {
 		return name;
 	}
-	
-	public enum type{
-		
-		Attack, Block, Spell;
-	}
-	
-	
+
 }

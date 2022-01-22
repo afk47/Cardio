@@ -7,6 +7,12 @@ import com.nucleardiesel.cardio.cards.Spells;
 
 public class CardLoader {
 
+	/**
+	 * Loads a card objects data by its name
+	 * @param c card name 
+	 * @param card to modify
+	 * @return card that was passed in
+	 */
 	public static Card loadCard(Cards cardname, Card card) {
 
 		switch (cardname.getType()) {
@@ -21,6 +27,7 @@ public class CardLoader {
 		return card;
 	}
 
+
 	public static Card loadCard(Spells cardname, Card card) {
 		card.setType(type.Spell);
 		switch (cardname) {
@@ -34,7 +41,6 @@ public class CardLoader {
 		}
 		return card;
 	}
-
 	public static Card loadCard(Attack c, Card card) {
 		card.setType(type.Attack);
 		switch (c) {
@@ -48,7 +54,6 @@ public class CardLoader {
 		}
 		return card;
 	}
-
 	public static Card loadCard(Block c, Card card) {
 		card.setType(type.Block);
 		switch (c) {

@@ -18,63 +18,79 @@ public class Player extends Entity {
 	private boolean blocking = false;
 	private int health = 1000;
 	private BattleScene scene;
-	public enum status{
+	private final String path = "characters/sword1/";
+	private float[] offset = {50, -50};
+	
+	/**
+	 *  possible statuses of a player
+	 *  @values poisoned, bleeding, invulnerable, or stunned
+	 *
+	 */
+	public enum status {
 		poisoned, bleeding, invulnerable, stunned;
 	}
-	
-	
-	public Player(Window window,BattleScene s) {
+
+	public Player(Window window, BattleScene s) {
 		super(window);
+		setPath(path);
 		scene = s;
 		doDefaultAnimation();
-		size = 10;
-		setPosition(-300, -250);
+		size = 4;
+		setPosition(-350, -180);
 	}
 
 	public void update() {
 		super.update();
 		if (!currentAnimation.equals("death")) {
 
-			if (currentAnimation.equals("jump") && animationCompleted) {
+			
+			if(animationCompleted) {
+				if(currentAnimation.equals("attack1")) {
+					addPosition(new float[] {-70,-67,0});
+				}
 				idle();
 			}
-			if (currentAnimation.equals("jump")) {
-				addPosition(new float[] { 0f, 20f, 0f });
-			}
-			if (!currentAnimation.equals("idle") && animationCompleted) {
-				idle();
-			}
+			
+			
 			if (currentframe != lastFrame) {
+				setFrame((int) Math.floor(currentframe));//Changes frame
+			}
+			
+			
+		} else {
+			
+			if ((int) Math.floor(currentframe) != lastFrame && !animationCompleted) {
+				addPosition(new float[] {0,-30,0});
 				setFrame((int) Math.floor(currentframe));
 			}
-		}else {
-			if (currentframe != lastFrame && !animationCompleted) {
-				setFrame((int) Math.floor(currentframe));
-			}
+			
+			
 		}
+
+	}
+
+	public void attack() {
 		
+		setAnimation("attack1", .5f, path);
+		addPosition(new float[] {70,67,0});
 	}
 
 	
 
-	public void attack() {
-		setAnimation("Characters/sword1/attack1", 0.5f);
-	}
-
 	public void idle() {
-		setAnimation("Characters/sword1/idle", 1);
+		setAnimation("idle", 2f, path);
 
 	}
 
 	public void run() {
 		if (currentAnimation != "attack1" && currentAnimation != "run" || !(currentframe < frames - 1))
-			setAnimation("Characters/sword1/run", .5f);
+			setAnimation("run", .5f, path);
 
 	}
 
 	@Override
 	protected void doDefaultAnimation() {
-		setAnimation("Characters/sword1/idle", 1);
+		setAnimation("idle", 1, path);
 
 	}
 
@@ -93,7 +109,7 @@ public class Player extends Entity {
 	}
 
 	public void jump() {
-		setAnimation("Characters/sword1/jump", .1f);
+		setAnimation("jump", .1f, path);
 
 	}
 
@@ -114,28 +130,34 @@ public class Player extends Entity {
 	}
 
 	public void death() {
-		setAnimation("Characters/sword1/death", .5f);
+		setAnimation("death", 2f, path);
 		currentAnimation = "death";
 	}
-	
+
 	public void block() {
 		blocking = true;
 	}
-	
+
 	public void stopBlocking() {
 		blocking = false;
 	}
 
 	public boolean isBlocking() {
-		
+
 		return blocking;
 	}
 
 	public void playFX(Spells s) {
-	
-		scene.playFX(s);	
+
+		scene.playFX(s);
 	}
 
-	
-
+	public float[] getOrigin() {
+		float[] temp = getPosition().clone();
+		
+		temp[0] += offset[0];
+		temp[1] += offset[1];
+		
+		return temp;
+	}
 }
