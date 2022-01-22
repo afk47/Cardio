@@ -64,7 +64,6 @@ public class Main implements Runnable {
 	 */
 	@Override
 	public void run() {
-		init();
 		while (running) {
 			update();
 			controller.render();
@@ -109,7 +108,10 @@ public class Main implements Runnable {
 	 * Creates a new main thread
 	 */
 	public static void main(String[] args) {
-		new Main().start();
+		Main main = new Main();
+		main.init();
+		main.run();
+		
 	}
 
 	public static double getPassed() {

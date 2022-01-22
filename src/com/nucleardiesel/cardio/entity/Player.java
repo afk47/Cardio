@@ -18,17 +18,19 @@ public class Player extends Entity {
 	private boolean blocking = false;
 	private int health = 1000;
 	private BattleScene scene;
-	public enum status{
+	private final String path = "characters/sword1/";
+
+	public enum status {
 		poisoned, bleeding, invulnerable, stunned;
 	}
-	
-	
-	public Player(Window window,BattleScene s) {
+
+	public Player(Window window, BattleScene s) {
 		super(window);
+		setPath(path);
 		scene = s;
 		doDefaultAnimation();
-		size = 10;
-		setPosition(-300, -250);
+		size = 1;
+		setPosition(-350, -250);
 	}
 
 	public void update() {
@@ -39,7 +41,7 @@ public class Player extends Entity {
 				idle();
 			}
 			if (currentAnimation.equals("jump")) {
-				addPosition(new float[] { 0f, 20f, 0f });
+				addPosition(new float[] { 0f, 10f, 0f });
 			}
 			if (!currentAnimation.equals("idle") && animationCompleted) {
 				idle();
@@ -47,34 +49,32 @@ public class Player extends Entity {
 			if (currentframe != lastFrame) {
 				setFrame((int) Math.floor(currentframe));
 			}
-		}else {
+		} else {
 			if (currentframe != lastFrame && !animationCompleted) {
 				setFrame((int) Math.floor(currentframe));
 			}
 		}
-		
+
 	}
 
-	
-
 	public void attack() {
-		setAnimation("Characters/sword1/attack1", 0.5f);
+		setAnimation("attack1", 0.5f);
 	}
 
 	public void idle() {
-		setAnimation("Characters/sword1/idle", 1);
+		setAnimation("idle", 20f);
 
 	}
 
 	public void run() {
 		if (currentAnimation != "attack1" && currentAnimation != "run" || !(currentframe < frames - 1))
-			setAnimation("Characters/sword1/run", .5f);
+			setAnimation("run", .5f);
 
 	}
 
 	@Override
 	protected void doDefaultAnimation() {
-		setAnimation("Characters/sword1/idle", 1);
+		setAnimation("idle", 1);
 
 	}
 
@@ -93,7 +93,7 @@ public class Player extends Entity {
 	}
 
 	public void jump() {
-		setAnimation("Characters/sword1/jump", .1f);
+		setAnimation("jump", .1f);
 
 	}
 
@@ -114,28 +114,26 @@ public class Player extends Entity {
 	}
 
 	public void death() {
-		setAnimation("Characters/sword1/death", .5f);
+		setAnimation("death", .5f);
 		currentAnimation = "death";
 	}
-	
+
 	public void block() {
 		blocking = true;
 	}
-	
+
 	public void stopBlocking() {
 		blocking = false;
 	}
 
 	public boolean isBlocking() {
-		
+
 		return blocking;
 	}
 
 	public void playFX(Spells s) {
-	
-		scene.playFX(s);	
-	}
 
-	
+		scene.playFX(s);
+	}
 
 }

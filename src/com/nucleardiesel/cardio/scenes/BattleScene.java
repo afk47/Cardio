@@ -13,7 +13,6 @@ import com.nucleardiesel.cardio.entity.Player;
 import com.nucleardiesel.cardio.entity.SlashEffect;
 import com.nucleardiesel.cardio.gui.Background;
 import com.nucleardiesel.cardio.gui.Button;
-import com.nucleardiesel.cardio.gui.CooldownIndicator;
 import com.nucleardiesel.cardio.gui.Drawable;
 import com.nucleardiesel.cardio.gui.Healthbar;
 import com.nucleardiesel.cardio.gui.Scene;
@@ -58,7 +57,7 @@ public class BattleScene extends Scene {
 
 		// CREATES Audio Player Then Plays Sound at file location
 		audioPlayer = new SoundPlayer();
-		audioPlayer.addSound("src/resources/textures/Music/Decisive Battle/xDeviruchi - Decisive Battle (Loop).ogg",
+		audioPlayer.addSound("src/resources/sounds/Music/Decisive Battle/xDeviruchi - Decisive Battle (Loop).ogg",
 				true);
 		audioPlayer.play(0);
 		p2hp.setLeftJustified(false);

@@ -90,7 +90,7 @@ public abstract class Entity implements Drawable {
 		animLoader.loadAnimation(file);
 		frames = animLoader.getTotalFrames();
 		animationTimer = 0;
-		currentframe = 1;
+		currentframe = 0;
 		currentAnimation = file;
 		animationLength = length;
 		setTexture(new Texture("/Sprites/" + file + ".png"));
@@ -146,5 +146,9 @@ public abstract class Entity implements Drawable {
 	
 	public boolean shouldDestroy() {
 		return false;
+	}
+	
+	public void setPath(String s) {
+		animLoader.setPath(s);
 	}
 }

@@ -17,30 +17,27 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class AnimationLoader {
 
-	
 	private static final Logger logger = LoggerFactory.getLogger(AnimationLoader.class);
 	private int h = -1;
 	private int w = -1;
 	private float[] texture_coords;
-	private String animation = "attack1";// Attack is currently a placeholder
+	private String animation = "fireball";// Attack is currently a placeholder
 	private int frames = 0;
-	private int currentFrame = 1;
+	private int currentFrame = 0;
 
 	float fx =0;
 	float fy =0;
 	float fh =0;
 	float fw =0;
+	private String path = "";
+	
+	
 
-	/*
-	 * TODO REWERITE SO THE TEXTURE COORDS ARE AN ARRAY WITH ALL TEX COORDS
-	 * 
-	 * 
-	 */
 	public void loadAnimation(String s) {
 		animation = s;
 		try {
 
-			File json = new File("src/resources/textures/Sprites/" + s + ".json");
+			File json = new File("src/resources/textures/Sprites/" + path + s + ".json");
 			ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
 
 			frames = node.get("frames").size();
@@ -75,15 +72,15 @@ public class AnimationLoader {
 
 		try {
 
-			File json = new File("src/resources/textures/Sprites/" + animation + ".json");
+			File json = new File("src/resources/textures/Sprites/" + path  + animation + ".json");
 			ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
 
 			if (node.has("frames")) {
 				String jsonString = "" + node.get("frames");
 				node = new ObjectMapper().readValue(jsonString, ObjectNode.class);
-				if (node.has(animation + "_" + i + ".png")) {
+				if (node.has(animation + "-" + i + ".png")) {
 					frames = node.size();
-					jsonString = "" + node.get(animation + "_" + i + ".png");
+					jsonString = "" + node.get(animation + "-" + i + ".png");
 					node = new ObjectMapper().readValue(jsonString, ObjectNode.class);
 					if (node.has("frame")) {
 						jsonString = "" + node.get("frame");
@@ -138,6 +135,10 @@ public class AnimationLoader {
 	
 	public float getFrameWidth() {
 		return fw;
+	}
+	
+	public void setPath(String s) {
+		path = s;
 	}
 
 }
